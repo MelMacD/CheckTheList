@@ -12,6 +12,7 @@
 		D91635CD2194DA9C004D8AFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91635CB2194DA9C004D8AFE /* Main.storyboard */; };
 		D91635CF2194DAA3004D8AFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91635CE2194DAA3004D8AFE /* Assets.xcassets */; };
 		D91635D22194DAA3004D8AFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91635D02194DAA3004D8AFE /* LaunchScreen.storyboard */; };
+		D92634CE219CCA0500ACC89F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92634CD219CCA0500ACC89F /* ListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D91635CE2194DAA3004D8AFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D91635D12194DAA3004D8AFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D91635D32194DAA3004D8AFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D92634CD219CCA0500ACC89F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				D91635C72194DA9C004D8AFE /* AppDelegate.swift */,
 				D91635C92194DA9C004D8AFE /* ViewController.swift */,
+				D92634CD219CCA0500ACC89F /* ListTableViewCell.swift */,
 				D91635CB2194DA9C004D8AFE /* Main.storyboard */,
 				D91635CE2194DAA3004D8AFE /* Assets.xcassets */,
 				D91635D02194DAA3004D8AFE /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			files = (
 				D91635CA2194DA9C004D8AFE /* ViewController.swift in Sources */,
 				D91635C82194DA9C004D8AFE /* AppDelegate.swift in Sources */,
+				D92634CE219CCA0500ACC89F /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
