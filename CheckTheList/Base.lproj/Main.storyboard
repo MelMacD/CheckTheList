@@ -93,6 +93,113 @@
             <point key="canvasLocation" x="176.80000000000001" y="27.436281859070466"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="VrU-MA-i8X">
+            <objects>
+                <viewController id="bAo-Jk-k90" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8zu-Hj-PoC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8BP-EG-5oh">
+                                <rect key="frame" x="10" y="20" width="355" height="553.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIi-Ih-1Mv">
+                                        <rect key="frame" x="158.5" y="0.0" width="38" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YKd-vp-lDr">
+                                        <rect key="frame" x="0.0" y="28.5" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hb-c8-sya">
+                                        <rect key="frame" x="131.5" y="66.5" width="92.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This needs a border so the user knows its an input field" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Koj-bl-ZBf">
+                                        <rect key="frame" x="0.0" y="95" width="355" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="KX1-9S-Uui"/>
+                                            <constraint firstAttribute="width" constant="355" id="nPA-5y-RuA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGy-hT-qlq">
+                                        <rect key="frame" x="139.5" y="203" width="76" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3s0-QW-Zso">
+                                        <rect key="frame" x="0.0" y="231.5" width="355" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="hav-jI-IFj"/>
+                                        </constraints>
+                                        <date key="date" timeIntervalSinceReferenceDate="563931612.25573397">
+                                            <!--2018-11-14 23:40:12 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participants:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juI-ti-JkZ">
+                                        <rect key="frame" x="130" y="339.5" width="95.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yR-xm-coF">
+                                        <rect key="frame" x="132.5" y="368" width="90" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdp-9P-zMT">
+                                        <rect key="frame" x="131.5" y="396.5" width="92.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aih-3y-euS">
+                                        <rect key="frame" x="131" y="425" width="93" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAC-T7-93g">
+                                        <rect key="frame" x="0.0" y="453.5" width="355" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="O6y-W9-wMm"/>
+                                        </constraints>
+                                    </pickerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3s0-QW-Zso" firstAttribute="leading" secondItem="8BP-EG-5oh" secondAttribute="leading" id="0uE-P8-Jwy"/>
+                                    <constraint firstAttribute="trailing" secondItem="YKd-vp-lDr" secondAttribute="trailing" id="2pT-8r-wIr"/>
+                                    <constraint firstItem="rAC-T7-93g" firstAttribute="leading" secondItem="8BP-EG-5oh" secondAttribute="leading" id="2xr-eL-dA8"/>
+                                    <constraint firstItem="YKd-vp-lDr" firstAttribute="leading" secondItem="8BP-EG-5oh" secondAttribute="leading" id="30V-PX-X5p"/>
+                                    <constraint firstAttribute="trailing" secondItem="rAC-T7-93g" secondAttribute="trailing" id="KoI-cD-na9"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8BP-EG-5oh" firstAttribute="leading" secondItem="tSG-ye-Xz8" secondAttribute="leading" constant="10" id="Bfj-UC-7JZ"/>
+                            <constraint firstItem="tSG-ye-Xz8" firstAttribute="trailing" secondItem="8BP-EG-5oh" secondAttribute="trailing" constant="10" id="Jfz-hl-InZ"/>
+                            <constraint firstItem="8BP-EG-5oh" firstAttribute="top" secondItem="tSG-ye-Xz8" secondAttribute="top" id="c8A-z3-6at"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tSG-ye-Xz8"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rKU-Fj-xv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="27"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
