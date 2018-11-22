@@ -150,6 +150,9 @@
                                 <rect key="frame" x="16" y="395" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="sumbitButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9aH-JX-32O"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -184,6 +187,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="2b7-Wa-Zsi" id="MQ6-R7-pLM"/>
+                        <outlet property="usernameFeild" destination="7V3-hp-f5x" id="eaJ-C6-Orv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -324,7 +331,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkbox" width="490" height="490"/>
+        <image name="checkbox" width="980" height="980"/>
         <image name="person" width="512" height="512"/>
     </resources>
 </document>

@@ -1,0 +1,49 @@
+{
+  "users": {
+    "user_id_1": {
+      "username": "user one",
+      "profile_pic": "some_url",
+      "article_counter" : 2,
+      "author_of_articles": [
+        "article_id_1",
+        "article_id_2"
+      ],
+      "author_of_comments": [
+        "comment_id_1"
+      ]
+    },
+    "user_id_2": {
+      "username": "user two",
+      "profile_pic": "some_url_2",
+      "author_of_comments": [
+        "comment_id_2"
+      ]
+    }
+  },
+  "articles": {
+    "article_id_1": {
+      "author": {
+        "id": "user_id_1",
+        "username": "user one",
+        "profile_pic": "some_url"
+      },
+      "title": "Firebase is so cool",
+      "comments": {
+        "comment_id_1": {
+          "comment": "First comment",
+          "author": {
+            "id": "user_id_1",
+            "username": "user one",
+            "profile_pic": "some_url"
+          }
+        },
+        "comment_id_2": "I like trains",
+        "author": {
+          "id": "user_id_2",
+          "username": "two",
+          "profile_pic": "some_url_2"
+        }
+      }
+    }
+  }
+}
