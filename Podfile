@@ -10,4 +10,5 @@ target 'CheckTheList' do
   pod 'Firebase'
   pod 'Firebase/Database'
   pod 'GoogleSignIn'
+  pod 'FirebaseUI/Auth'
 end
