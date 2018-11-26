@@ -10,6 +10,16 @@ import UIKit
 
 class TaskViewController: UIViewController {
 
+    //MARK: Properties
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var descrTextField: UITextView!
+    @IBOutlet weak var dueDatePicker: UIDatePicker!
+    @IBOutlet weak var optParticipant1: UILabel!
+    @IBOutlet weak var optParticipant2: UILabel!
+    @IBOutlet weak var optParticipant3: UILabel!
+    @IBOutlet weak var participantPicker: UIPickerView!
+    @IBOutlet weak var statusLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

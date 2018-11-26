@@ -81,6 +81,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="completedFlag" destination="s1w-gn-I0E" id="jiC-59-38f"/>
+                                    <outlet property="infoButton" destination="adf-uT-zdg" id="JEC-r9-5YP"/>
+                                    <outlet property="listDueDate" destination="xhS-0k-fvJ" id="vgH-SQ-kUy"/>
+                                    <outlet property="listName" destination="GRR-vf-mYi" id="VXL-CM-Yd8"/>
+                                    <outlet property="participantFlag" destination="1nj-c9-r2G" id="mFT-PP-0AX"/>
                                     <segue destination="Elj-sd-0V0" kind="presentation" id="uB7-rr-Mro"/>
                                 </connections>
                             </tableViewCell>
@@ -115,7 +120,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8BP-EG-5oh">
-                                <rect key="frame" x="10" y="64" width="355" height="553.5"/>
+                                <rect key="frame" x="10" y="64" width="355" height="496.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIi-Ih-1Mv">
                                         <rect key="frame" x="158.5" y="0.0" width="38" height="20.5"/>
@@ -166,26 +171,32 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yR-xm-coF">
-                                        <rect key="frame" x="132.5" y="368" width="90" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yR-xm-coF">
+                                        <rect key="frame" x="132.5" y="364" width="90" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdp-9P-zMT">
-                                        <rect key="frame" x="131.5" y="396.5" width="92.5" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdp-9P-zMT">
+                                        <rect key="frame" x="131.5" y="364" width="92.5" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aih-3y-euS">
-                                        <rect key="frame" x="131" y="425" width="93" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aih-3y-euS">
+                                        <rect key="frame" x="131" y="364" width="93" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Participant:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8X-L1-vER">
+                                        <rect key="frame" x="109.5" y="368" width="136" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAC-T7-93g">
-                                        <rect key="frame" x="0.0" y="453.5" width="355" height="100"/>
+                                        <rect key="frame" x="0.0" y="396.5" width="355" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="O6y-W9-wMm"/>
                                         </constraints>
@@ -212,6 +223,15 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uq0-Ap-DAu"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="u3c-lk-MwE"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descrTextView" destination="Koj-bl-ZBf" id="VTP-xC-Wry"/>
+                        <outlet property="dueDatePicker" destination="3s0-QW-Zso" id="baq-xp-AM4"/>
+                        <outlet property="nameTextField" destination="YKd-vp-lDr" id="vWn-Sl-yUz"/>
+                        <outlet property="optParticipant1" destination="3yR-xm-coF" id="Cny-ec-OlV"/>
+                        <outlet property="optParticipant2" destination="hdp-9P-zMT" id="mZc-Im-lz4"/>
+                        <outlet property="optParticipant3" destination="aih-3y-euS" id="szU-6G-4wZ"/>
+                        <outlet property="participantPicker" destination="rAC-T7-93g" id="AB0-fK-UBA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKU-Fj-xv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -581,6 +601,14 @@
                                         <constraint firstItem="Dp4-cb-IXm" firstAttribute="leading" secondItem="kpp-Ec-BDS" secondAttribute="trailing" constant="8" id="xZx-Ed-8tX"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="completedFlag" destination="Dp4-cb-IXm" id="FHf-U5-Xqh"/>
+                                    <outlet property="infoButton" destination="eJY-Ef-8xc" id="36t-mD-PPe"/>
+                                    <outlet property="participantFlag" destination="kpp-Ec-BDS" id="eac-WS-Ji3"/>
+                                    <outlet property="taskDueDate" destination="7b7-dM-O0G" id="bzu-wb-8YV"/>
+                                    <outlet property="taskName" destination="lfo-DS-O1w" id="gZA-KJ-Dd9"/>
+                                    <outlet property="taskStatus" destination="fCM-tP-DrO" id="a9a-Of-gRs"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -613,7 +641,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iyX-cb-Hfb">
-                                <rect key="frame" x="10" y="64" width="355" height="610.5"/>
+                                <rect key="frame" x="10" y="64" width="355" height="553.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NX-KK-gTS">
                                         <rect key="frame" x="158.5" y="0.0" width="38" height="20.5"/>
@@ -664,38 +692,44 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pV2-uK-XKp">
-                                        <rect key="frame" x="132.5" y="368" width="90" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pV2-uK-XKp">
+                                        <rect key="frame" x="132.5" y="364" width="90" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdY-kX-tdd">
-                                        <rect key="frame" x="131.5" y="396.5" width="92.5" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdY-kX-tdd">
+                                        <rect key="frame" x="131.5" y="364" width="92.5" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ2-G8-oso">
-                                        <rect key="frame" x="131" y="425" width="93" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ2-G8-oso">
+                                        <rect key="frame" x="131" y="364" width="93" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Participant:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yh-GO-Lzz">
+                                        <rect key="frame" x="109.5" y="368" width="136" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-a0-BxN">
-                                        <rect key="frame" x="0.0" y="453.5" width="355" height="100"/>
+                                        <rect key="frame" x="0.0" y="396.5" width="355" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Wz2-al-Pew"/>
                                         </constraints>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3y-z6-wcD">
-                                        <rect key="frame" x="150.5" y="561.5" width="54" height="20.5"/>
+                                        <rect key="frame" x="150.5" y="504.5" width="54" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvw-JN-cGK">
-                                        <rect key="frame" x="144" y="590" width="67.5" height="20.5"/>
+                                        <rect key="frame" x="144" y="533" width="67.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -722,10 +756,20 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vzI-R0-QX3"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="gVZ-JK-uiy"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descrTextField" destination="XWL-Du-sL4" id="HkU-Rq-UWF"/>
+                        <outlet property="dueDatePicker" destination="Dkb-X0-Nr7" id="3Es-kX-aT6"/>
+                        <outlet property="nameTextField" destination="rOC-el-n5T" id="WRX-h7-oGN"/>
+                        <outlet property="optParticipant1" destination="pV2-uK-XKp" id="J5m-Ke-Qb3"/>
+                        <outlet property="optParticipant2" destination="LdY-kX-tdd" id="lSS-Ah-Q59"/>
+                        <outlet property="optParticipant3" destination="UJ2-G8-oso" id="P45-55-6v4"/>
+                        <outlet property="participantPicker" destination="fKg-a0-BxN" id="SFa-dj-eBm"/>
+                        <outlet property="statusLabel" destination="Tvw-JN-cGK" id="YWa-Da-T5G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDs-dt-UNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4535" y="847"/>
+            <point key="canvasLocation" x="4533.6000000000004" y="846.9265367316342"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bNS-WF-2hc">
