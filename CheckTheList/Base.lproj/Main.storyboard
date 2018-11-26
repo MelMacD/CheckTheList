@@ -763,13 +763,16 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="gVZ-JK-uiy"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="descrTextField" destination="XWL-Du-sL4" id="HkU-Rq-UWF"/>
+                        <outlet property="cancel" destination="vzI-R0-QX3" id="hdB-pk-TDq"/>
+                        <outlet property="cancelButton" destination="vzI-R0-QX3" id="Ffb-0D-8sd"/>
+                        <outlet property="descrTextView" destination="XWL-Du-sL4" id="4yW-E4-xS0"/>
                         <outlet property="dueDatePicker" destination="Dkb-X0-Nr7" id="3Es-kX-aT6"/>
                         <outlet property="nameTextField" destination="rOC-el-n5T" id="WRX-h7-oGN"/>
                         <outlet property="optParticipant1" destination="pV2-uK-XKp" id="J5m-Ke-Qb3"/>
                         <outlet property="optParticipant2" destination="LdY-kX-tdd" id="lSS-Ah-Q59"/>
                         <outlet property="optParticipant3" destination="UJ2-G8-oso" id="P45-55-6v4"/>
                         <outlet property="participantPicker" destination="fKg-a0-BxN" id="SFa-dj-eBm"/>
+                        <outlet property="saveButton" destination="gVZ-JK-uiy" id="oRI-Km-tYZ"/>
                         <outlet property="statusLabel" destination="Tvw-JN-cGK" id="YWa-Da-T5G"/>
                     </connections>
                 </viewController>
