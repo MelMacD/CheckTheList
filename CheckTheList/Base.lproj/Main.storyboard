@@ -12,7 +12,7 @@
         <!--Checklists-->
         <scene sceneID="NUc-hX-3EW">
             <objects>
-                <tableViewController id="U18-ca-p9F" sceneMemberID="viewController">
+                <tableViewController id="U18-ca-p9F" customClass="ListTableViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gs6-4e-MKI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +109,7 @@
         <!--New/Edit Checklist-->
         <scene sceneID="VrU-MA-i8X">
             <objects>
-                <viewController id="bAo-Jk-k90" sceneMemberID="viewController">
+                <viewController id="bAo-Jk-k90" customClass="ListViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8zu-Hj-PoC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -504,13 +504,13 @@
         <!--Tasks-->
         <scene sceneID="dfm-Uu-7Zh">
             <objects>
-                <tableViewController id="ahc-Sm-OqZ" sceneMemberID="viewController">
+                <tableViewController id="ahc-Sm-OqZ" customClass="TaskTableViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tJK-Lc-CYI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListTableViewCell" rowHeight="110" id="yJc-qc-hmM" customClass="ListTableViewCell" customModule="CheckTheList" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListTableViewCell" rowHeight="110" id="yJc-qc-hmM" customClass="TaskTableViewCell" customModule="CheckTheList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yJc-qc-hmM" id="OZo-9q-5vh">
@@ -607,7 +607,7 @@
         <!--New/Edit Task-->
         <scene sceneID="ZNB-Bh-8Hw">
             <objects>
-                <viewController id="0eN-57-SPP" sceneMemberID="viewController">
+                <viewController id="0eN-57-SPP" customClass="TaskViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tqs-AY-EbK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
