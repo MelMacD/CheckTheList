@@ -28,15 +28,9 @@ class ViewController: UIViewController, FUIAuthDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLoggedIn()
-        
-        
-       
-        
     }
     
-    
     func checkLoggedIn() {
-        print(1222222222)
         Auth.auth().addStateDidChangeListener { auth, user in
             if user != nil {
                 // User is signed in.
@@ -52,6 +46,8 @@ class ViewController: UIViewController, FUIAuthDelegate{
         }
         }
     }
+  
+
     func signOut(){
         
       try! Auth.auth().signOut()
@@ -63,7 +59,8 @@ class ViewController: UIViewController, FUIAuthDelegate{
     
     @IBAction func signOutButton(_ sender: Any) {
          signOut()
-        print("s w")
+        print("User signed out")
+        
        
     }
     @IBAction func loginButton(_ sender: UIButton) {
@@ -108,13 +105,10 @@ extension ViewController{
         // var userEmail = authDataResult?.user.email
       //  performSegue(withIdentifier: "tableView", sender: self)
         
+        
         if let tableViewVC = sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
             self.present(tableViewVC, animated: true, completion: nil)
         }
-            
-            
-       
-        
     }
 }
 

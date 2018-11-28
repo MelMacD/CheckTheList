@@ -15,6 +15,8 @@ target 'CheckTheList' do
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/Twitter'
   pod 'FirebaseUI/Phone'
+  pod 'Firebase/Firestore'
+
 
 
 
