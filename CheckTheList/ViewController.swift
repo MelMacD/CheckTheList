@@ -16,16 +16,19 @@ import FirebaseAuth
 
 
 
+
 class ViewController: UIViewController, FUIAuthDelegate{
 
    
 
-
+    let sb = UIStoryboard(name: "Main", bundle: nil)
     
     let rootRef =  Database.database().reference()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkLoggedIn()
+        
         
        
         
@@ -37,16 +40,32 @@ class ViewController: UIViewController, FUIAuthDelegate{
         Auth.auth().addStateDidChangeListener { auth, user in
             if user != nil {
                 // User is signed in.
-                self.performSegue(withIdentifier: "tableView", sender: self)
-            } else {
-                // No user is signed in.
-                print(111111111111)
-                self.loginPage()
+                if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
+                    self.present(tableViewVC, animated: true, completion: nil)
+                }
+               // self.performSegue(withIdentifier: "tableView", sender: self)
             }
+                // No user is signed in.
+            else{
+                print(user?.email)
+                self.loginPage()
+        }
         }
     }
+    func signOut(){
+        
+      try! Auth.auth().signOut()
+      //  print(Auth.auth().currentUser?.email)
+       // URLCache.shared.removeAllCachedResponses()
+        //URLCache.shared.diskCapacity = 0
+        //URLCache.shared.memoryCapacity = 0
+    }
     
-    
+    @IBAction func signOutButton(_ sender: Any) {
+         signOut()
+        print("s w")
+       
+    }
     @IBAction func loginButton(_ sender: UIButton) {
         checkLoggedIn()
     }
@@ -69,8 +88,8 @@ extension ViewController{
         let providers: [FUIAuthProvider] = [
            // FUIGoogleAuth(),
             FUIGoogleAuth(),
-            FUITwitterAuth(),
-            FUIPhoneAuth(authUI: FUIAuth.defaultAuthUI()!),
+           // FUITwitterAuth(),
+           // FUIPhoneAuth(authUI: FUIAuth.defaultAuthUI()!),
             ]
         authUI?.providers = providers
         
@@ -87,7 +106,14 @@ extension ViewController{
             return
         }
         // var userEmail = authDataResult?.user.email
-        performSegue(withIdentifier: "tableView", sender: self)
+      //  performSegue(withIdentifier: "tableView", sender: self)
+        
+        if let tableViewVC = sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
+            self.present(tableViewVC, animated: true, completion: nil)
+        }
+            
+            
+       
         
     }
 }

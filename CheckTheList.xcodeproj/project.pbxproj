@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A8B161BD219CF279004A522D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8B161BC219CF279004A522D /* GoogleService-Info.plist */; };
+		A8B5C9AC21AF2DAB00C79FAF /* TabTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B5C9AB21AF2DAB00C79FAF /* TabTableViewController.swift */; };
 		BE86DA286E312E380B69F5D3 /* Pods_CheckTheList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD91A89C3805B295F402362 /* Pods_CheckTheList.framework */; };
 		D91635C82194DA9C004D8AFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91635C72194DA9C004D8AFE /* AppDelegate.swift */; };
 		D91635CA2194DA9C004D8AFE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91635C92194DA9C004D8AFE /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 		04DCA6F9DC25D9F0712FA95F /* Pods-CheckTheList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckTheList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CheckTheList/Pods-CheckTheList.release.xcconfig"; sourceTree = "<group>"; };
 		6FD91A89C3805B295F402362 /* Pods_CheckTheList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CheckTheList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8B161BC219CF279004A522D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A8B5C9AB21AF2DAB00C79FAF /* TabTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabTableViewController.swift; path = /Users/kayvee/Uofr/Projects/CheckTheList/CheckTheList/CheckTheList/TabTableViewController.swift; sourceTree = "<absolute>"; };
 		CF3E984A1383AC0DD226922B /* Pods-CheckTheList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckTheList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckTheList/Pods-CheckTheList.debug.xcconfig"; sourceTree = "<group>"; };
 		D91635C42194DA9C004D8AFE /* CheckTheList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckTheList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91635C72194DA9C004D8AFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				D91635C72194DA9C004D8AFE /* AppDelegate.swift */,
 				D91635C92194DA9C004D8AFE /* ViewController.swift */,
+				A8B5C9AB21AF2DAB00C79FAF /* TabTableViewController.swift */,
 				D92634CD219CCA0500ACC89F /* ListTableViewCell.swift */,
 				D91635CB2194DA9C004D8AFE /* Main.storyboard */,
 				D91635CE2194DAA3004D8AFE /* Assets.xcassets */,
@@ -273,6 +276,7 @@
 				D91635CA2194DA9C004D8AFE /* ViewController.swift in Sources */,
 				D91635C82194DA9C004D8AFE /* AppDelegate.swift in Sources */,
 				D92634CE219CCA0500ACC89F /* ListTableViewCell.swift in Sources */,
+				A8B5C9AC21AF2DAB00C79FAF /* TabTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
