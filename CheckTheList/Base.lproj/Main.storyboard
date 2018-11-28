@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cph-XH-KeG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,17 +9,26 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Title-->
         <scene sceneID="NUc-hX-3EW">
             <objects>
                 <tableViewController id="U18-ca-p9F" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gs6-4e-MKI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gs6-4e-MKI" customClass="table">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="Njq-lz-vEY">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Title" id="56r-vs-j0p">
+                                    <barButtonItem key="rightBarButtonItem" title="Sign Out" id="YVq-5A-Gbj"/>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListTableViewCell" rowHeight="80" id="MCT-YV-JLw" customClass="ListTableViewCell" customModule="CheckTheList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MCT-YV-JLw" id="JjG-eP-oiX">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
@@ -87,10 +96,13 @@
                             <outlet property="delegate" destination="U18-ca-p9F" id="Btt-28-itp"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="k83-fQ-0Vx"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OGy-wT-441" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176.80000000000001" y="27.436281859070466"/>
+            <point key="canvasLocation" x="330" y="1540"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -150,15 +162,7 @@
                                 <rect key="frame" x="16" y="395" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Submit"/>
-                                <connections>
-                                    <action selector="sumbitButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9aH-JX-32O"/>
-                                </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q8K-uk-kC1" customClass="GIDSignInButton">
-                                <rect key="frame" x="16" y="528" width="343" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -192,10 +196,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="titleLabel" destination="2b7-Wa-Zsi" id="MQ6-R7-pLM"/>
-                        <outlet property="usernameFeild" destination="7V3-hp-f5x" id="eaJ-C6-Orv"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -333,6 +333,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zr-a3-y4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-725" y="684"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Qng-PX-B5d">
+            <objects>
+                <viewController id="cph-XH-KeG" customClass="ViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XsW-XD-szo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check the List!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1t-NA-0cu">
+                                <rect key="frame" x="0.0" y="120" width="375" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jP8-PF-We9">
+                                <rect key="frame" x="168.5" y="318.5" width="38" height="30"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginButton:" destination="cph-XH-KeG" eventType="touchUpInside" id="MDZ-9w-JdJ"/>
+                                    <segue destination="U18-ca-p9F" kind="show" identifier="tableView" id="3M7-q9-akT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="b1t-NA-0cu" firstAttribute="leading" secondItem="VGA-4D-k3L" secondAttribute="leading" id="HFS-uE-7Ti"/>
+                            <constraint firstItem="b1t-NA-0cu" firstAttribute="trailing" secondItem="VGA-4D-k3L" secondAttribute="trailing" id="XKA-QG-kQP"/>
+                            <constraint firstItem="jP8-PF-We9" firstAttribute="centerX" secondItem="XsW-XD-szo" secondAttribute="centerX" id="cub-th-SA9"/>
+                            <constraint firstItem="b1t-NA-0cu" firstAttribute="top" secondItem="VGA-4D-k3L" secondAttribute="top" constant="100" id="oQG-26-oy6"/>
+                            <constraint firstItem="jP8-PF-We9" firstAttribute="centerY" secondItem="XsW-XD-szo" secondAttribute="centerY" id="x8z-cK-68u"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VGA-4D-k3L"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="yul-ce-fzU"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hgr-IN-6jS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-722.39999999999998" y="1539.5802098950526"/>
         </scene>
     </scenes>
     <resources>

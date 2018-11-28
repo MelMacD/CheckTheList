@@ -11,4 +11,11 @@ target 'CheckTheList' do
   pod 'Firebase/Database'
   pod 'GoogleSignIn'
   pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/Twitter'
+  pod 'FirebaseUI/Phone'
+
+
+
 end

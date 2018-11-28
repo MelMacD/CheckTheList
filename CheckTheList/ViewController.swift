@@ -10,28 +10,85 @@ import UIKit
 import Firebase
 import FirebaseUI
 import GoogleSignIn
+import CoreData
+import Firebase
+import FirebaseAuth
 
-class ViewController: UIViewController {
 
-    @IBOutlet weak var usernameFeild: UITextField!
-    @IBOutlet weak var titleLabel: UILabel!
+
+class ViewController: UIViewController, FUIAuthDelegate{
+
+   
+
+
     
-    
-   let rootRef =  Database.database().reference()
-    
-    
-    
+    let rootRef =  Database.database().reference()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-
-    @IBAction func sumbitButton(_ sender: Any) {
         
-      
        
+        
     }
- 
+    
+    
+    func checkLoggedIn() {
+        print(1222222222)
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if user != nil {
+                // User is signed in.
+                self.performSegue(withIdentifier: "tableView", sender: self)
+            } else {
+                // No user is signed in.
+                print(111111111111)
+                self.loginPage()
+            }
+        }
+    }
+    
+    
+    @IBAction func loginButton(_ sender: UIButton) {
+        checkLoggedIn()
+    }
+    
+    
+    
+}
+
+// Email sign In
+extension ViewController{
+    
+    func loginPage(){
+        let authUI = FUIAuth.defaultAuthUI()
+        guard authUI != nil else{
+            return
+        }
+        
+        authUI?.delegate = self
+        
+        let providers: [FUIAuthProvider] = [
+           // FUIGoogleAuth(),
+            FUIGoogleAuth(),
+            FUITwitterAuth(),
+            FUIPhoneAuth(authUI: FUIAuth.defaultAuthUI()!),
+            ]
+        authUI?.providers = providers
+        
+        
+        let authViewController = authUI!.authViewController()
+        
+        present(authViewController, animated: true, completion: nil)
+        
+    }
+    
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        if error != nil {
+            print(error!.localizedDescription)
+            return
+        }
+        // var userEmail = authDataResult?.user.email
+        performSegue(withIdentifier: "tableView", sender: self)
+        
+    }
 }
 
