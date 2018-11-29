@@ -20,58 +20,29 @@ import FirebaseAuth
 class ViewController: UIViewController, FUIAuthDelegate{
 
    
-
+    // mark: Variables
     let sb = UIStoryboard(name: "Main", bundle: nil)
-    
     let rootRef =  Database.database().reference()
-
+   
+    let db = Firestore.firestore()
+    //mark: Page functions
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLoggedIn()
     }
     
-    func checkLoggedIn() {
-        Auth.auth().addStateDidChangeListener { auth, user in
-            if user != nil {
-                // User is signed in.
-                if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
-                    self.present(tableViewVC, animated: true, completion: nil)
-                }
-               // self.performSegue(withIdentifier: "tableView", sender: self)
-            }
-                // No user is signed in.
-            else{
-                print(user?.email)
-                self.loginPage()
-        }
-        }
-    }
-  
-
-    func signOut(){
-        
-      try! Auth.auth().signOut()
-      //  print(Auth.auth().currentUser?.email)
-       // URLCache.shared.removeAllCachedResponses()
-        //URLCache.shared.diskCapacity = 0
-        //URLCache.shared.memoryCapacity = 0
-    }
     
-    @IBAction func signOutButton(_ sender: Any) {
-         signOut()
-        print("User signed out")
-        
-       
-    }
+    
+    // mark: buttons
+    // mark: actions
     @IBAction func loginButton(_ sender: UIButton) {
         checkLoggedIn()
     }
-    
-    
-    
+
 }
 
-// Email sign In
+
+// sign In Page
 extension ViewController{
     
     func loginPage(){
@@ -83,10 +54,8 @@ extension ViewController{
         authUI?.delegate = self
         
         let providers: [FUIAuthProvider] = [
-           // FUIGoogleAuth(),
+           
             FUIGoogleAuth(),
-           // FUITwitterAuth(),
-           // FUIPhoneAuth(authUI: FUIAuth.defaultAuthUI()!),
             ]
         authUI?.providers = providers
         
@@ -110,5 +79,73 @@ extension ViewController{
             self.present(tableViewVC, animated: true, completion: nil)
         }
     }
+    
+    func checkLoggedIn() {
+        Auth.auth().addStateDidChangeListener { auth, user in
+        if user != nil {
+        // User is signed in.
+        if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
+        self.present(tableViewVC, animated: true, completion: nil)
+        }
+        // self.performSegue(withIdentifier: "tableView", sender: self)
+      //  let currentUserIn = Users(Name: user!.displayName!, idToken: user!.uid, email: user!.email!)
+       // let userAlreadyExist = Users.checkUsersList(Name: user!.displayName!, idToken: user!.uid, email: user!.email!)
+        let isNewuser = self.checkUsersList(idToken: user!.uid)
+            print(isNewuser)
+            if isNewuser != true {
+                self.newUserEntry(Name:user!.displayName!, idToken:user!.uid, email: user!.email!)
+            }
+            
+        }
+        // No user is signed in.
+            else{
+            
+            self.loginPage()
+            }
+        }
+    }
+    
+    func signOut(){
+        try! Auth.auth().signOut()
+    }
 }
 
+
+
+extension ViewController {
+    
+    func checkUsersList(idToken: String) -> Bool {
+        
+        
+        let docRef = db.collection("UserList").document(idToken)
+        var result = 3
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                 result = 1
+            } else {
+                 result = 0
+            }
+        }
+        if result == 1 {
+            return true
+        }else{
+            return false
+        }
+        
+    }
+    
+    func newUserEntry(Name:String, idToken:String, email: String){
+        
+        db.collection("Userlist").document(idToken).setData([
+            "name": Name,
+            "email": email,
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+    }
+}

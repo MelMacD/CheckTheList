@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A820B62021AF45850082D65B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = A820B61F21AF45850082D65B /* Users.swift */; };
 		A8279D2421AF32B400CFD047 /* rn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8279D2321AF32B400CFD047 /* rn.swift */; };
 		A8B161BD219CF279004A522D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8B161BC219CF279004A522D /* GoogleService-Info.plist */; };
 		A8B5C9AC21AF2DAB00C79FAF /* TabTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B5C9AB21AF2DAB00C79FAF /* TabTableViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		04DCA6F9DC25D9F0712FA95F /* Pods-CheckTheList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckTheList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CheckTheList/Pods-CheckTheList.release.xcconfig"; sourceTree = "<group>"; };
 		6FD91A89C3805B295F402362 /* Pods_CheckTheList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CheckTheList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A820B61F21AF45850082D65B /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		A8279D2321AF32B400CFD047 /* rn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rn.swift; sourceTree = "<group>"; };
 		A8B161BC219CF279004A522D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A8B5C9AB21AF2DAB00C79FAF /* TabTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabTableViewController.swift; path = /Users/kayvee/Uofr/Projects/CheckTheList/CheckTheList/CheckTheList/TabTableViewController.swift; sourceTree = "<absolute>"; };
@@ -88,6 +90,7 @@
 			children = (
 				D91635C72194DA9C004D8AFE /* AppDelegate.swift */,
 				D91635C92194DA9C004D8AFE /* ViewController.swift */,
+				A820B61F21AF45850082D65B /* Users.swift */,
 				A8B5C9AB21AF2DAB00C79FAF /* TabTableViewController.swift */,
 				D92634CD219CCA0500ACC89F /* ListTableViewCell.swift */,
 				D91635CB2194DA9C004D8AFE /* Main.storyboard */,
@@ -294,6 +297,7 @@
 				D91635C82194DA9C004D8AFE /* AppDelegate.swift in Sources */,
 				A8279D2421AF32B400CFD047 /* rn.swift in Sources */,
 				D92634CE219CCA0500ACC89F /* ListTableViewCell.swift in Sources */,
+				A820B62021AF45850082D65B /* Users.swift in Sources */,
 				A8B5C9AC21AF2DAB00C79FAF /* TabTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
