@@ -17,6 +17,8 @@
 		D98F4EBD21AC962E00D1AF2D /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98F4EBC21AC962E00D1AF2D /* ListTableViewController.swift */; };
 		D98F4EBF21AC964400D1AF2D /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98F4EBE21AC964400D1AF2D /* TaskTableViewController.swift */; };
 		D98F4EC121AC97B700D1AF2D /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98F4EC021AC97B700D1AF2D /* TaskViewController.swift */; };
+		D9955C1F21B2010B00F85D51 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9955C1E21B2010B00F85D51 /* List.swift */; };
+		D9955C2121B2011E00F85D51 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9955C2021B2011E00F85D51 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		D98F4EBC21AC962E00D1AF2D /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		D98F4EBE21AC964400D1AF2D /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		D98F4EC021AC97B700D1AF2D /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		D9955C1E21B2010B00F85D51 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		D9955C2021B2011E00F85D51 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 				D98F4EBC21AC962E00D1AF2D /* ListTableViewController.swift */,
 				D98F4EB821AC94B300D1AF2D /* TaskTableViewCell.swift */,
 				D98F4EBE21AC964400D1AF2D /* TaskTableViewController.swift */,
+				D9955C1E21B2010B00F85D51 /* List.swift */,
+				D9955C2021B2011E00F85D51 /* Task.swift */,
 				D91635CB2194DA9C004D8AFE /* Main.storyboard */,
 				D91635CE2194DAA3004D8AFE /* Assets.xcassets */,
 				D91635D02194DAA3004D8AFE /* LaunchScreen.storyboard */,
@@ -151,11 +157,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D98F4EBF21AC964400D1AF2D /* TaskTableViewController.swift in Sources */,
+				D9955C1F21B2010B00F85D51 /* List.swift in Sources */,
 				D98F4EC121AC97B700D1AF2D /* TaskViewController.swift in Sources */,
 				D98F4EB921AC94B300D1AF2D /* TaskTableViewCell.swift in Sources */,
 				D91635CA2194DA9C004D8AFE /* ListViewController.swift in Sources */,
 				D91635C82194DA9C004D8AFE /* AppDelegate.swift in Sources */,
 				D98F4EBD21AC962E00D1AF2D /* ListTableViewController.swift in Sources */,
+				D9955C2121B2011E00F85D51 /* Task.swift in Sources */,
 				D92634CE219CCA0500ACC89F /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
