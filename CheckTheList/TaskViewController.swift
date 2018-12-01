@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UINavigationControllerDelegate, UIPickerViewDataSource {
 
@@ -27,7 +28,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     let participantOptions = ["username1", "username2", "username3"]
     
     // Controls whether passing in a new or preexisting task
-    // var task: Task?
+    var task: Task?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,14 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         descrTextView.layer.borderWidth = 1
         descrTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
         
-        //TODO: Insert code here to edit an existing Checklist
+        if let task = task {
+            navigationItem.title = task.name
+            nameTextField.text = task.name
+            descrTextView.text = task.descr
+            dueDatePicker.setDate(task.dueDate, animated: true)
+            statusLabel.text = task.status
+            // TODO insert code for participants
+        }
         
         //TODO: Handling for save button depending on if appropriate fields have been filled in
     }
@@ -139,33 +147,31 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     }
     
     // Configure a view controller before it's presented
-    /*
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     super.prepare(for: segue, sender: sender)
-     
-     // Confgure the destination view controller only when save button is pressed
-     guard let button = sender as? UIBarButtonItem, button === saveButton else {
-     os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-     return
-     }
-     
-     let title = titleTextField.text ?? ""
-     let photo = Image(photo: pictureImageView.image!, scaleAmount: imageScrollView.zoomScale, centerX: determineCenter().x, centerY: determineCenter().y)
-     let notes = notesTextView.text ?? ""
-     var dateEntered = dateEnteredValue.text ?? ""
-     let isPresentingInAddItemMode = presentingViewController is UINavigationController
-     
-     if isPresentingInAddItemMode {
-     dateEntered = convertDateToString(date: Date())
-     }
-     let priority = priorityPicker.selectedRow(inComponent: 0)
-     
-     let dateDue = getDueDateValue(selection: dateDuePicker.selectedRow(inComponent: 0))
-     
-     // Set the meal to be passed to ListItemTableViewController after the unwind seque
-     
-     listItem = ListItem(title: title, photo: photo!, notes: notes, dateEntered: dateEntered, dateDue: dateDue, priority: priority)
-     }    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        // Confgure the destination view controller only when save button is pressed
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+        
+        let name = nameTextField.text ?? ""
+        let descr = descrTextView.text ?? ""
+        let dueDate = dueDatePicker.date
+        let participants = [String]() // placeholder, TODO
+        let status = statusLabel.text ?? ""
+        let isPresentingInAddItemMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddItemMode {//??
+        }
+        
+        // Set the list to be passed to ListTableViewController after the unwind seque
+        
+        task = Task(name: name, descr: descr, dueDate: dueDate, participants: participants, status: status)
+    }
+    
     
     //MARK: Custom Functions
     

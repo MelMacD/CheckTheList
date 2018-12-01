@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UINavigationControllerDelegate, UIPickerViewDataSource {
     
@@ -25,7 +26,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     let participantOptions = ["username1", "username2", "username3"]
     
     // Controls whether passing in a new or preexisting list
-    // var checklist: Checklist?
+    var checklist: List?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,13 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         descrTextView.layer.borderWidth = 1
         descrTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
         
-        //TODO: Insert code here to edit an existing Checklist
+        if let checklist = checklist {
+            navigationItem.title = checklist.name
+            nameTextField.text = checklist.name
+            descrTextView.text = checklist.descr
+            dueDatePicker.setDate(checklist.dueDate, animated: true)
+            // TODO insert code for participants
+        }
         
         //TODO: Handling for save button depending on if appropriate fields have been filled in
     }
@@ -135,7 +142,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     }
     
     // Configure a view controller before it's presented
-    /*
+    
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      super.prepare(for: segue, sender: sender)
      
@@ -145,23 +152,19 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      return
      }
      
-     let title = titleTextField.text ?? ""
-     let photo = Image(photo: pictureImageView.image!, scaleAmount: imageScrollView.zoomScale, centerX: determineCenter().x, centerY: determineCenter().y)
-     let notes = notesTextView.text ?? ""
-     var dateEntered = dateEnteredValue.text ?? ""
+     let name = nameTextField.text ?? ""
+     let descr = descrTextView.text ?? ""
+     let dueDate = dueDatePicker.date
+     let participants = [String]() // placeholder, TODO
      let isPresentingInAddItemMode = presentingViewController is UINavigationController
      
-     if isPresentingInAddItemMode {
-     dateEntered = convertDateToString(date: Date())
+     if isPresentingInAddItemMode {//??
      }
-     let priority = priorityPicker.selectedRow(inComponent: 0)
      
-     let dateDue = getDueDateValue(selection: dateDuePicker.selectedRow(inComponent: 0))
+     // Set the list to be passed to ListTableViewController after the unwind seque
      
-     // Set the meal to be passed to ListItemTableViewController after the unwind seque
-     
-     listItem = ListItem(title: title, photo: photo!, notes: notes, dateEntered: dateEntered, dateDue: dateDue, priority: priority)
-     }    */
+        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants)
+     }
     
     //MARK: Custom Functions
     
