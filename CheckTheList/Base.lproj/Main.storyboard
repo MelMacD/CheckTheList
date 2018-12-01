@@ -250,7 +250,9 @@
         <scene sceneID="eDJ-An-05B">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xjj-rG-aSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+
                 <navigationController storyboardIdentifier="tableViewVC" automaticallyAdjustsScrollViewInsets="NO" id="ljn-0s-ATb" sceneMemberID="viewController">
+
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HCc-rm-yWf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -262,7 +264,9 @@
                     </connections>
                 </navigationController>
             </objects>
+
             <point key="canvasLocation" x="673" y="27"/>
+
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VZD-PX-FDJ">
@@ -591,7 +595,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3D-LS-Jei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+
             <point key="canvasLocation" x="-345" y="27"/>
+
         </scene>
     </scenes>
     <resources>

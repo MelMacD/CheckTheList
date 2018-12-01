@@ -22,11 +22,11 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet weak var descrTextView: UITextView!
     @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var optParticipant1: UILabel!
-    @IBOutlet weak var optParticipant2: UILabel!//hidden by default
-    @IBOutlet weak var optParticipant3: UILabel!//hidden by default
     @IBOutlet weak var participantPicker: UIPickerView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var addParticipant: UIButton!
+    @IBOutlet weak var selectParticipant: UIButton!
     
     //Sample options for the pickers for testing purposes
     let participantOptions = ["username1", "username2", "username3"]
@@ -54,18 +54,25 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             nameTextField.text = checklist.name
             descrTextView.text = checklist.descr
             dueDatePicker.setDate(checklist.dueDate, animated: true)
-            // TODO insert code for participants
+            if checklist.participants.count != 0 {
+                optParticipant1.text = checklist.participants.compactMap({$0}).joined(separator: ", ")
+            }
+            if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
+                addParticipant.isHidden = true
+            }
         } else {
+            saveButton.isEnabled = false
             isEdit = false
         }
         
+
         
         
         var  User = Auth.auth().currentUser!
         Print(User.displayName)
         
         
-        //TODO: Handling for save button depending on if appropriate fields have been filled in
+        
     }
     
     //MARK: UITextFieldDelegate
@@ -79,6 +86,12 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         //executes after done editing, can disable save button or not (TODO)
+        if textField.text != "" {
+            saveButton.isEnabled = true
+        }
+        else {
+            saveButton.isEnabled = false
+        }
         navigationItem.title = textField.text
     }
 
@@ -89,7 +102,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     //MARK: UITextViewDelegate
     
-    //Setup for handling to resign the texr view keyboard
+    //Setup for handling to resign the text view keyboard
     func textViewDidBeginEditing(_ textView: UITextView) {
         cancelButton.title = "Done"
     }
@@ -107,35 +120,13 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     // Sets the number of options for the pickers as according to their tag values, and the number of elements in
     // their "options" arrays
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if (pickerView.tag == 1) {
             return participantOptions.count
-        }
-        else {
-            return participantOptions.count
-        }
     }
     
     // Sets the values of the pickers as according to their tag values
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        // The due date picker has a tag of 1
-        if (pickerView.tag == 1){
             return "\(participantOptions[row])"
-        }
-            // The priority picker has a tag of 2
-        else{
-            return "\(participantOptions[row])"
-        }
     }
-    
-    // Shows the participant picker if number of participants does not exceed three, TODO
-    /*func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if (pickerView.tag == 1 && row == 1){
-            doHideDatePicker(flag: false)
-        }
-        else if (pickerView.tag == 1){
-            doHideDatePicker(flag: true)
-        }
-    }*/
     
     //MARK: Navigation
     
@@ -143,6 +134,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         // This button should dismiss the text view keyboard if it is open
         if cancelButton.title == "Done" {
             descrTextView.resignFirstResponder()
+            return
         }
         
         //Depending on style of presentation (modal or push), this view should be dismissed differently (is treated differently whether it was used to "Add" or "Edit")
@@ -151,9 +143,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         if isPresentingInAddMode && !isEdit!{
             dismiss(animated: true, completion: nil)
         }
-        /*else if isPresentingInAddMode && isEdit == true {
-            navigationController!.popViewController(animated: true)
-        }*/
         else if let owningNavigationController = navigationController {
             owningNavigationController.popViewController(animated: true)
         }
@@ -176,21 +165,43 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      let name = nameTextField.text ?? ""
      let descr = descrTextView.text ?? ""
      let dueDate = dueDatePicker.date
-     let participants = [String]() // placeholder, TODO
-     let isPresentingInAddItemMode = presentingViewController is UINavigationController
+     var participants = optParticipant1.text?.components(separatedBy: ", ")
+    if optParticipant1.text == "None" {
+        participants = []
+    }
+    let isPresentingInAddItemMode = presentingViewController is UINavigationController
      
      if isPresentingInAddItemMode {//??
      }
      
      // Set the list to be passed to ListTableViewController after the unwind seque
      
-        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants)
+        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
      }
     
     //MARK: Custom Functions
     
-    //TODO implement save button enabled toggle here
-    
-    //TODO write function to toggle visibility of participants and picker conditionally
+    @IBAction func addParticipant(_ sender: Any) {
+        participantPicker.isHidden = false
+        selectParticipant.isHidden = false
+        addParticipant.isHidden = true
+    }
+    @IBAction func commitParticipant(_ sender: Any) {
+        selectParticipant.isHidden = true
+        participantPicker.isHidden = true
+        addParticipant.isHidden = false
+        if optParticipant1.text == "None" {
+            optParticipant1.text = participantOptions[participantPicker.selectedRow(inComponent: 0)]
+        }
+        else {
+            var participants = optParticipant1.text?.components(separatedBy: ", ")
+        participants!.append(participantOptions[participantPicker.selectedRow(inComponent: 0)])
+            optParticipant1.text = participants.flatMap({$0})!.joined(separator: ", ")
+        }
+        
+        if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
+            addParticipant.isHidden = true
+        }
+    }
 }
 

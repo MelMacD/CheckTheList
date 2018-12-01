@@ -14,13 +14,12 @@ class ListTableViewController: UITableViewController {
     //MARK: Properties
     
     var lists = [List]()
-    @IBOutlet weak var edit: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Hook up edit button to use default API
-        edit = editButtonItem
+        navigationItem.rightBarButtonItem = editButtonItem
         
         // TODO: display saved items from firebase
         loadSampleItems()
@@ -67,6 +66,7 @@ class ListTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            //TODO: Check here if list is complete, prompt user if they are sure if it isn't
             // Delete the row from the data source
             lists.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
