@@ -101,23 +101,20 @@
                     <navigationItem key="navigationItem" title="Checklists" id="JhC-du-l4H">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="vSa-4A-AXu"/>
                         <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="ef0-Q4-Sol"/>
                             <barButtonItem systemItem="add" id="UWC-2J-veo">
                                 <connections>
                                     <segue destination="ncA-YV-gF5" kind="presentation" identifier="AddItem" id="AWU-7q-xbE"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="edit" id="ef0-Q4-Sol"/>
                         </rightBarButtonItems>
                     </navigationItem>
-                    <connections>
-                        <outlet property="edit" destination="ef0-Q4-Sol" id="tJA-vl-Caw"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OGy-wT-441" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2055.1999999999998" y="27.436281859070466"/>
         </scene>
-        <!--New/Edit Checklist-->
+        <!--New Checklist-->
         <scene sceneID="VrU-MA-i8X">
             <objects>
                 <viewController id="bAo-Jk-k90" customClass="ListViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
@@ -220,17 +217,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tSG-ye-Xz8"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New/Edit Checklist" id="Izf-tM-ItZ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uq0-Ap-DAu">
+                    <navigationItem key="navigationItem" title="New Checklist" id="Izf-tM-ItZ">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="uq0-Ap-DAu">
                             <connections>
                                 <action selector="cancel:" destination="bAo-Jk-k90" id="yqb-Cd-I6d"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="u3c-lk-MwE"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="u3c-lk-MwE">
+                            <connections>
+                                <segue destination="O0J-Ss-n3m" kind="unwind" unwindAction="unwindToItemListWithSender:" id="yJV-d1-ZrK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addParticipant" destination="Chg-9Z-DVq" id="PbZ-JA-gZN"/>
-                        <outlet property="cancelButton" destination="uq0-Ap-DAu" id="gZC-Fe-hpp"/>
+                        <outlet property="cancelButton" destination="uq0-Ap-DAu" id="neU-ql-2pX"/>
                         <outlet property="descrTextView" destination="Koj-bl-ZBf" id="VTP-xC-Wry"/>
                         <outlet property="dueDatePicker" destination="3s0-QW-Zso" id="baq-xp-AM4"/>
                         <outlet property="nameTextField" destination="YKd-vp-lDr" id="vWn-Sl-yUz"/>
@@ -241,6 +242,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKU-Fj-xv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="O0J-Ss-n3m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3788" y="26.53673163418291"/>
         </scene>
