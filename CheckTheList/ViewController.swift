@@ -90,7 +90,7 @@ extension ViewController{
       //  performSegue(withIdentifier: "tableView", sender: self)
         
         
-        if let tableViewVC = sb.instantiateViewController(withIdentifier: "loginVC") as? ViewController{
+        if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? ListTableViewController{
             self.present(tableViewVC, animated: true, completion: nil)
         }
     }

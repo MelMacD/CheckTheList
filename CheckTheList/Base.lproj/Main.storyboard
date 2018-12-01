@@ -265,7 +265,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xjj-rG-aSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1154" y="27"/>
+            <point key="canvasLocation" x="143" y="27"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VZD-PX-FDJ">
@@ -597,11 +597,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3D-LS-Jei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="369" y="27"/>
+            <point key="canvasLocation" x="1049" y="716"/>
         </scene>
     </scenes>
     <resources>
-        <image name="checkbox" width="490" height="490"/>
+        <image name="checkbox" width="980" height="980"/>
         <image name="person" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
