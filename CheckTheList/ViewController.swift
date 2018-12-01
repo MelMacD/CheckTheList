@@ -90,7 +90,7 @@ extension ViewController{
       //  performSegue(withIdentifier: "tableView", sender: self)
         
         
-        if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? ListTableViewController{
+        if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? UINavigationController{
             self.present(tableViewVC, animated: true, completion: nil)
         }
     }
@@ -109,7 +109,7 @@ extension ViewController{
                 
                 
             }
-            if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? ListTableViewController{
+            if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? UINavigationController {
                 self.present(tableViewVC, animated: true, completion: nil)
             }
             

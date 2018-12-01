@@ -8,6 +8,12 @@
 
 import UIKit
 import os.log
+import Firebase
+import FirebaseUI
+import GoogleSignIn
+import CoreData
+import Firebase
+import FirebaseAuth
 
 class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UINavigationControllerDelegate, UIPickerViewDataSource {
     
@@ -25,6 +31,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     //Sample options for the pickers for testing purposes
     let participantOptions = ["username1", "username2", "username3"]
     
+
     // Controls whether passing in a new or preexisting list
     var checklist: List?
     
@@ -51,6 +58,12 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         } else {
             isEdit = false
         }
+        
+        
+        
+        var  User = Auth.auth().currentUser!
+        Print(User.displayName)
+        
         
         //TODO: Handling for save button depending on if appropriate fields have been filled in
     }
