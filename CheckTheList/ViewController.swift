@@ -109,7 +109,7 @@ extension ViewController{
                 
                 
             }
-            if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
+            if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? ListTableViewController{
                 self.present(tableViewVC, animated: true, completion: nil)
             }
             

@@ -12,7 +12,7 @@
         <!--Checklists-->
         <scene sceneID="NUc-hX-3EW">
             <objects>
-                <tableViewController id="U18-ca-p9F" customClass="ListTableViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="U18-ca-p9F" customClass="ListTableViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gs6-4e-MKI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -597,7 +597,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3D-LS-Jei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="942" y="989"/>
+            <point key="canvasLocation" x="758" y="847"/>
         </scene>
     </scenes>
     <resources>
