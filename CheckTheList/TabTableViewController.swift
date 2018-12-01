@@ -9,6 +9,7 @@ import UIKit
 
 class TabTableViewController: UITableViewController {
     
+    let sb = UIStoryboard(name: "Main", bundle: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +38,9 @@ class TabTableViewController: UITableViewController {
    
     @IBAction func signOutButton(_ sender: Any) {
         ViewController().signOut()
-        self.dismiss(animated: true, completion: nil)
+        if let tableViewVC = sb.instantiateViewController(withIdentifier: "loginVC") as? ViewController{
+            self.present(tableViewVC, animated: true, completion: nil)
+        }
     }
     
     /*

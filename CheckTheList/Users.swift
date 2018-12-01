@@ -24,18 +24,7 @@ class Users {
         self.email = email
     }
     
-    func getData () ->(_ : String, _ : String, _ : String){
     
-        let a = ""
-        let b = ""
-        let c = ""
-        
-    return (a, b, c)
-    }
-    
-    func snapshotData(){
-        
-    }
     
 }
 

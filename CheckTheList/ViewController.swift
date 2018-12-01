@@ -25,10 +25,15 @@ class ViewController: UIViewController, FUIAuthDelegate{
     let rootRef =  Database.database().reference()
    
     let db = Firestore.firestore()
+    
+  
     //mark: Page functions
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLoggedIn()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
     }
     
     
@@ -37,6 +42,14 @@ class ViewController: UIViewController, FUIAuthDelegate{
     // mark: actions
     @IBAction func loginButton(_ sender: UIButton) {
         checkLoggedIn()
+    }
+    func signOut(){
+        try! Auth.auth().signOut()
+        GIDSignIn.sharedInstance().signOut()
+       
+    
+        
+       
     }
 
 }
@@ -56,6 +69,8 @@ extension ViewController{
         let providers: [FUIAuthProvider] = [
            
             FUIGoogleAuth(),
+           
+            
             ]
         authUI?.providers = providers
         
@@ -75,7 +90,7 @@ extension ViewController{
       //  performSegue(withIdentifier: "tableView", sender: self)
         
         
-        if let tableViewVC = sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
+        if let tableViewVC = sb.instantiateViewController(withIdentifier: "loginVC") as? ViewController{
             self.present(tableViewVC, animated: true, completion: nil)
         }
     }
@@ -83,35 +98,37 @@ extension ViewController{
     func checkLoggedIn() {
         Auth.auth().addStateDidChangeListener { auth, user in
         if user != nil {
+            //print(user?.displayName)
         // User is signed in.
-        if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
-        self.present(tableViewVC, animated: true, completion: nil)
-        }
-        // self.performSegue(withIdentifier: "tableView", sender: self)
-      //  let currentUserIn = Users(Name: user!.displayName!, idToken: user!.uid, email: user!.email!)
-       // let userAlreadyExist = Users.checkUsersList(Name: user!.displayName!, idToken: user!.uid, email: user!.email!)
         let isNewuser = self.checkUsersList(idToken: user!.uid)
             print(isNewuser)
             if isNewuser != true {
-                self.newUserEntry(Name:user!.displayName!, idToken:user!.uid, email: user!.email!)
+               
+                self.newUserEntry(idToken:user!.uid, email: user!.email!)
+                
+                
+                
             }
             
         }
+        if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
+            self.present(tableViewVC, animated: true, completion: nil)
+              }
         // No user is signed in.
             else{
             
             self.loginPage()
+           
+            
             }
         }
     }
     
-    func signOut(){
-        try! Auth.auth().signOut()
-    }
+    
 }
 
 
-
+///Controller
 extension ViewController {
     
     func checkUsersList(idToken: String) -> Bool {
@@ -134,11 +151,11 @@ extension ViewController {
         
     }
     
-    func newUserEntry(Name:String, idToken:String, email: String){
+    func newUserEntry(idToken:String, email: String){
         
         db.collection("Userlist").document(idToken).setData([
-            "name": Name,
             "email": email,
+            "id":idToken,
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

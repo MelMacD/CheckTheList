@@ -336,12 +336,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zr-a3-y4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-725" y="684"/>
+            <point key="canvasLocation" x="140" y="27"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Qng-PX-B5d">
             <objects>
-                <viewController id="cph-XH-KeG" customClass="ViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cph-XH-KeG" customClass="ViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XsW-XD-szo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
