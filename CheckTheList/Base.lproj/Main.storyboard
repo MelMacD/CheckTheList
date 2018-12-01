@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ljn-0s-ATb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tnI-kM-aN4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -265,7 +265,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1116" y="27.436281859070466"/>
+            <point key="canvasLocation" x="1154" y="27"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VZD-PX-FDJ">
@@ -555,6 +555,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpF-eh-mie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2884" y="847"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="SFx-Co-hYt">
+            <objects>
+                <viewController storyboardIdentifier="loginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tnI-kM-aN4" customClass="ViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZHZ-l2-5sP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check the List!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLa-ED-tGo">
+                                <rect key="frame" x="0.0" y="120" width="375" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYK-nX-39Z">
+                                <rect key="frame" x="168.5" y="318.5" width="38" height="30"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginButton:" destination="tnI-kM-aN4" eventType="touchUpInside" id="RNg-bk-cQb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="dYK-nX-39Z" firstAttribute="centerY" secondItem="ZHZ-l2-5sP" secondAttribute="centerY" id="Hei-vF-Bjl"/>
+                            <constraint firstItem="fLa-ED-tGo" firstAttribute="top" secondItem="0kj-Sl-ec8" secondAttribute="top" constant="100" id="IoY-yR-ftu"/>
+                            <constraint firstItem="fLa-ED-tGo" firstAttribute="leading" secondItem="0kj-Sl-ec8" secondAttribute="leading" id="RgM-mj-JER"/>
+                            <constraint firstItem="fLa-ED-tGo" firstAttribute="trailing" secondItem="0kj-Sl-ec8" secondAttribute="trailing" id="eTL-4I-LDs"/>
+                            <constraint firstItem="dYK-nX-39Z" firstAttribute="centerX" secondItem="ZHZ-l2-5sP" secondAttribute="centerX" id="v0p-0n-b3I"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0kj-Sl-ec8"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="P6a-AR-2V3"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="uws-Le-sZs"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3D-LS-Jei" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="420" y="27"/>
         </scene>
     </scenes>
     <resources>
