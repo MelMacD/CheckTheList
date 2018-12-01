@@ -10,6 +10,11 @@ import UIKit
 
 class TaskTableViewController: UITableViewController {
 
+    //MARK: Properties
+    
+    var checklist: List?
+    var tasks = [Task]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

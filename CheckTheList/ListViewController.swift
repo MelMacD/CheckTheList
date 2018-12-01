@@ -28,6 +28,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     // Controls whether passing in a new or preexisting list
     var checklist: List?
     
+    var isEdit: Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
@@ -40,11 +42,14 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         descrTextView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
         
         if let checklist = checklist {
+            isEdit = true
             navigationItem.title = checklist.name
             nameTextField.text = checklist.name
             descrTextView.text = checklist.descr
             dueDatePicker.setDate(checklist.dueDate, animated: true)
             // TODO insert code for participants
+        } else {
+            isEdit = false
         }
         
         //TODO: Handling for save button depending on if appropriate fields have been filled in
@@ -130,9 +135,12 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         //Depending on style of presentation (modal or push), this view should be dismissed differently (is treated differently whether it was used to "Add" or "Edit")
         let isPresentingInAddMode = presentingViewController is UINavigationController
         
-        if isPresentingInAddMode {
+        if isPresentingInAddMode && !isEdit!{
             dismiss(animated: true, completion: nil)
         }
+        /*else if isPresentingInAddMode && isEdit == true {
+            navigationController!.popViewController(animated: true)
+        }*/
         else if let owningNavigationController = navigationController {
             owningNavigationController.popViewController(animated: true)
         }
