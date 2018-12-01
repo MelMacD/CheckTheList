@@ -51,6 +51,9 @@ class ListTableViewController: UITableViewController {
         cell.listName.text = list.name
         cell.listDueDate.text = convertDateToString(date: list.dueDate)
         // TODO: Handling for completion, existence of participants
+        /*if list.participants.count == 0 {
+            cell.participantFlag.isHidden = true
+        }*/
 
         return cell
     }
@@ -144,11 +147,11 @@ class ListTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSampleItems() {
-        guard let list1 = List(name: "Default item", descr: "Here are some notes", dueDate: Date(), participants: ["", "", ""]) else {
+        guard let list1 = List(name: "Default item", descr: "Here are some notes", dueDate: Date(), participants: []) else {
             fatalError("Unable to instantiate list item1")
         }
         
-        guard let list2 = List(name: "Default item2", descr: "Here are some more notes", dueDate: Date(), participants: ["", "", ""]) else {
+        guard let list2 = List(name: "Default item2", descr: "Here are some more notes", dueDate: Date(), participants: ["user1", "user2", "user3"]) else {
             fatalError("Unable to instantiate list item2")
         }
         lists += [list1, list2]
