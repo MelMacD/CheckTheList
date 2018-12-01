@@ -6,13 +6,34 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseUI
+import GoogleSignIn
+import CoreData
+import Firebase
+import FirebaseAuth
 class TabTableViewController: UITableViewController {
     
     let sb = UIStoryboard(name: "Main", bundle: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if user != nil {
+                print(user?.email)
+                print(989898989898)
+               
+                
+                }
+            else {
+                try! Auth.auth().signOut()
+                print(121212121212)
+                if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "loginVC") as? ViewController{
+                    self.present(tableViewVC, animated: true, completion: nil)
+                }
+            }
+                
+            }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         

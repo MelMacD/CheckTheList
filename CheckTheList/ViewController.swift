@@ -109,11 +109,12 @@ extension ViewController{
                 
                 
             }
+            if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
+                self.present(tableViewVC, animated: true, completion: nil)
+            }
             
         }
-        if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? TabTableViewController{
-            self.present(tableViewVC, animated: true, completion: nil)
-              }
+        
         // No user is signed in.
             else{
             
