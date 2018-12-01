@@ -16,11 +16,11 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet weak var descrTextView: UITextView!
     @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var optParticipant1: UILabel!
-    @IBOutlet weak var optParticipant2: UILabel!//hidden by default
-    @IBOutlet weak var optParticipant3: UILabel!//hidden by default
     @IBOutlet weak var participantPicker: UIPickerView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var addParticipant: UIButton!
+    @IBOutlet weak var selectParticipant: UIButton!
     
     //Sample options for the pickers for testing purposes
     let participantOptions = ["username1", "username2", "username3"]
@@ -47,12 +47,17 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             nameTextField.text = checklist.name
             descrTextView.text = checklist.descr
             dueDatePicker.setDate(checklist.dueDate, animated: true)
-            // TODO insert code for participants
+            if checklist.participants.count != 0 {
+                optParticipant1.text = checklist.participants.compactMap({$0}).joined(separator: ", ")
+            }
+            if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
+                addParticipant.isHidden = true
+            }
         } else {
             isEdit = false
         }
-        
         //TODO: Handling for save button depending on if appropriate fields have been filled in
+        
     }
     
     //MARK: UITextFieldDelegate
@@ -115,14 +120,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     }
     
     // Shows the participant picker if number of participants does not exceed three, TODO
-    /*func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if (pickerView.tag == 1 && row == 1){
-            doHideDatePicker(flag: false)
-        }
-        else if (pickerView.tag == 1){
-            doHideDatePicker(flag: true)
-        }
-    }*/
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //on select, update participants label
+    }
     
     //MARK: Navigation
     
@@ -163,15 +163,15 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      let name = nameTextField.text ?? ""
      let descr = descrTextView.text ?? ""
      let dueDate = dueDatePicker.date
-     let participants = [String]() // placeholder, TODO
-     let isPresentingInAddItemMode = presentingViewController is UINavigationController
+     let participants = optParticipant1.text?.components(separatedBy: ", ")
+    let isPresentingInAddItemMode = presentingViewController is UINavigationController
      
      if isPresentingInAddItemMode {//??
      }
      
      // Set the list to be passed to ListTableViewController after the unwind seque
      
-        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants)
+        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
      }
     
     //MARK: Custom Functions
@@ -179,5 +179,27 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     //TODO implement save button enabled toggle here
     
     //TODO write function to toggle visibility of participants and picker conditionally
+    @IBAction func addParticipant(_ sender: Any) {
+        participantPicker.isHidden = false
+        selectParticipant.isHidden = false
+        addParticipant.isHidden = true
+    }
+    @IBAction func commitParticipant(_ sender: Any) {
+        selectParticipant.isHidden = true
+        participantPicker.isHidden = true
+        addParticipant.isHidden = false
+        if optParticipant1.text == "None" {
+            optParticipant1.text = participantOptions[participantPicker.selectedRow(inComponent: 0)]
+        }
+        else {
+            var participants = optParticipant1.text?.components(separatedBy: ", ")
+        participants!.append(participantOptions[participantPicker.selectedRow(inComponent: 0)])
+            optParticipant1.text = participants.flatMap({$0})!.joined(separator: ", ")
+        }
+        
+        if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
+            addParticipant.isHidden = true
+        }
+    }
 }
 
