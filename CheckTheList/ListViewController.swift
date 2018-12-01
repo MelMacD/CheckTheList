@@ -69,7 +69,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         
         var  User = Auth.auth().currentUser!
-        Print(User.displayName)
+        
+        print(User.displayName)
         
         
         
