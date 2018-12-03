@@ -54,7 +54,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
        
         
-        print(self.participantOptions)
         nameTextField.delegate = self
         descrTextView.delegate = self
         participantPicker.delegate = self
@@ -72,9 +71,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             descrTextView.text = checklist.descr
             dueDatePicker.setDate(checklist.dueDate, animated: true)
             if checklist.participants.count != 0 {
-                optParticipant1.text = checklist.participants.compactMap({$0}).joined(separator: ", ")
+                optParticipant1.text = checklist.participants.compactMap({$0}).joined(separator: "\n")
             }
-            if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
+            if optParticipant1.text?.components(separatedBy: "\n").count == 3 {
                 addParticipant.isHidden = true
             }
         } else {
@@ -173,7 +172,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      let name = nameTextField.text ?? ""
      let descr = descrTextView.text ?? ""
      let dueDate = dueDatePicker.date
-     var participants = optParticipant1.text?.components(separatedBy: ", ")
+     var participants = optParticipant1.text?.components(separatedBy: "\n")
     if optParticipant1.text == "None" {
         participants = []
     }
@@ -249,7 +248,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                         
                         let email = data["email"] as? String ?? "none"
                         self.participantOptions.append(email)
-                        print(self.participantOptions)
                     }
                     
                 }
@@ -276,14 +274,15 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             optParticipant1.text = participantOptions[participantPicker.selectedRow(inComponent: 0)]
         }
         else {
-            var participants = optParticipant1.text?.components(separatedBy: ", ")
+            var participants = optParticipant1.text?.components(separatedBy: "\n")
         participants!.append(participantOptions[participantPicker.selectedRow(inComponent: 0)])
-            optParticipant1.text = participants.flatMap({$0})!.joined(separator: ", ")
+            optParticipant1.text = participants.flatMap({$0})!.joined(separator: "\n")
         }
         
-        if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
+        if optParticipant1.text?.components(separatedBy: "\n").count == 3 {
             addParticipant.isHidden = true
         }
+        self.participantOptions = participantOptions.filter {$0 != participantOptions[participantPicker.selectedRow(inComponent: 0)]}
     }
     
   

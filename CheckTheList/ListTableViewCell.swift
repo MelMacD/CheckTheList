@@ -14,7 +14,7 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var listName: UILabel!
     @IBOutlet weak var listDueDate: UILabel!
     @IBOutlet weak var participantFlag: UIImageView!
-    @IBOutlet weak var completedFlag: UIImageView!
+    @IBOutlet weak var completedFlag: UIButton!
     @IBOutlet weak var infoButton: UIButton!
     
     override func awakeFromNib() {
