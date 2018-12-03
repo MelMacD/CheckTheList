@@ -43,7 +43,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
 
     
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +51,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         // kv: update participants from firebase into the the array participantOptions
         getUserFromUserList()
-       
         
         
         nameTextField.delegate = self
@@ -128,12 +126,12 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     // Sets the number of options for the pickers as according to their tag values, and the number of elements in
     // their "options" arrays
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return participantOptions.count
+        return self.participantOptions.count
     }
     
     // Sets the values of the pickers as according to their tag values
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            return "\(participantOptions[row])"
+        return "\(self.participantOptions[row])"
     }
     
     //MARK: Navigation
@@ -276,6 +274,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                 }
                 
         }
+        self.participantPicker.reloadAllComponents()
     }
     
     @IBAction func saveChecklist(_ sender: UIBarButtonItem) {
@@ -286,6 +285,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         participantPicker.isHidden = false
         selectParticipant.isHidden = false
         addParticipant.isHidden = true
+        self.participantPicker.reloadAllComponents()
     }
     @IBAction func commitParticipant(_ sender: Any) {
         selectParticipant.isHidden = true
