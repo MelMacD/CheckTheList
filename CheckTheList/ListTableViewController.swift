@@ -49,10 +49,10 @@ class ListTableViewController: UITableViewController {
         
         cell.listName.text = list.name
         cell.listDueDate.text = convertDateToString(date: list.dueDate)
-        // TODO: Handling for completion, existence of participants
         if list.participants.count == 0 {
             cell.participantFlag.isHidden = true
         }
+        //TODO: Handling for completion
 
         return cell
     }

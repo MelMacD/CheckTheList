@@ -94,7 +94,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        //executes after done editing, can disable save button or not (TODO)
         if textField.text != "" {
             saveButton.isEnabled = true
         }

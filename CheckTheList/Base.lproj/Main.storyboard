@@ -292,9 +292,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListTableViewCell" rowHeight="110" id="yJc-qc-hmM" customClass="TaskTableViewCell" customModule="CheckTheList" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskTableViewCell" rowHeight="110" id="yJc-qc-hmM" customClass="TaskTableViewCell" customModule="CheckTheList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="110"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yJc-qc-hmM" id="OZo-9q-5vh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="109.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -335,7 +335,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCM-tP-DrO">
-                                            <rect key="frame" x="16" y="78" width="343" height="21"/>
+                                            <rect key="frame" x="305" y="78" width="54" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -343,22 +343,22 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="fCM-tP-DrO" secondAttribute="trailing" id="0Ux-yg-XFp"/>
-                                        <constraint firstItem="fCM-tP-DrO" firstAttribute="leading" secondItem="OZo-9q-5vh" secondAttribute="leadingMargin" id="5iz-Rg-bzY"/>
                                         <constraint firstItem="eJY-Ef-8xc" firstAttribute="leading" secondItem="7b7-dM-O0G" secondAttribute="trailing" constant="8" id="6pv-3k-3XO"/>
                                         <constraint firstItem="eJY-Ef-8xc" firstAttribute="top" secondItem="Dp4-cb-IXm" secondAttribute="bottom" constant="7" id="EcK-4r-w25"/>
-                                        <constraint firstItem="fCM-tP-DrO" firstAttribute="top" secondItem="7b7-dM-O0G" secondAttribute="bottom" constant="9" id="EeY-Pl-pcq"/>
                                         <constraint firstItem="Dp4-cb-IXm" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="top" id="F53-7Z-49k"/>
-                                        <constraint firstItem="eJY-Ef-8xc" firstAttribute="bottom" secondItem="OZo-9q-5vh" secondAttribute="bottomMargin" id="HRr-7Z-5as"/>
                                         <constraint firstAttribute="trailing" secondItem="Dp4-cb-IXm" secondAttribute="trailing" constant="16" id="KzR-RQ-nxz"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="top" secondItem="lfo-DS-O1w" secondAttribute="bottom" constant="16" id="NPh-aN-aly"/>
                                         <constraint firstItem="kpp-Ec-BDS" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="topMargin" constant="2" id="PhR-6X-lro"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="top" secondItem="kpp-Ec-BDS" secondAttribute="bottom" constant="7" id="SbU-EL-0Kx"/>
                                         <constraint firstItem="kpp-Ec-BDS" firstAttribute="leading" secondItem="lfo-DS-O1w" secondAttribute="trailing" constant="8" id="YIN-0P-N36"/>
+                                        <constraint firstItem="fCM-tP-DrO" firstAttribute="top" secondItem="7b7-dM-O0G" secondAttribute="bottom" constant="9" id="YSt-cg-xvu"/>
+                                        <constraint firstItem="fCM-tP-DrO" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="top" constant="78" id="avU-bJ-vnD"/>
+                                        <constraint firstItem="fCM-tP-DrO" firstAttribute="bottom" secondItem="OZo-9q-5vh" secondAttribute="bottomMargin" id="cdM-Xq-ryZ"/>
+                                        <constraint firstItem="fCM-tP-DrO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OZo-9q-5vh" secondAttribute="leading" constant="20" symbolic="YES" id="cvF-eg-OtU"/>
                                         <constraint firstItem="lfo-DS-O1w" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="topMargin" id="f1G-od-v0O"/>
                                         <constraint firstItem="eJY-Ef-8xc" firstAttribute="trailing" secondItem="OZo-9q-5vh" secondAttribute="trailingMargin" id="mfw-sp-dQK"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="top" secondItem="kpp-Ec-BDS" secondAttribute="bottom" constant="7" id="nB8-2L-xcm"/>
                                         <constraint firstItem="lfo-DS-O1w" firstAttribute="leading" secondItem="OZo-9q-5vh" secondAttribute="leadingMargin" id="oRi-KA-J2S"/>
-                                        <constraint firstItem="7b7-dM-O0G" firstAttribute="bottom" secondItem="OZo-9q-5vh" secondAttribute="bottomMargin" id="tkl-ow-bfr"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="leading" secondItem="OZo-9q-5vh" secondAttribute="leadingMargin" id="utv-BA-InU"/>
                                         <constraint firstItem="Dp4-cb-IXm" firstAttribute="leading" secondItem="kpp-Ec-BDS" secondAttribute="trailing" constant="8" id="xZx-Ed-8tX"/>
                                     </constraints>
@@ -369,7 +369,8 @@
                                     <outlet property="participantFlag" destination="kpp-Ec-BDS" id="eac-WS-Ji3"/>
                                     <outlet property="taskDueDate" destination="7b7-dM-O0G" id="bzu-wb-8YV"/>
                                     <outlet property="taskName" destination="lfo-DS-O1w" id="gZA-KJ-Dd9"/>
-                                    <outlet property="taskStatus" destination="fCM-tP-DrO" id="a9a-Of-gRs"/>
+                                    <outlet property="taskStatus" destination="fCM-tP-DrO" id="Ueu-to-PVR"/>
+                                    <segue destination="0eN-57-SPP" kind="show" identifier="EditTask" id="v9W-3P-xew"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -379,14 +380,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="J4g-CS-4uU">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="CwB-Ff-xfE"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="CwB-Ff-xfE">
+                            <connections>
+                                <action selector="cancel:" destination="ahc-Sm-OqZ" id="d38-Zv-H2a"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="kek-n5-ZLP"/>
                             <barButtonItem systemItem="add" id="Rap-p9-bkM">
                                 <connections>
-                                    <segue destination="mGv-Kg-Bd7" kind="presentation" id="Bay-6F-YbG"/>
+                                    <segue destination="mGv-Kg-Bd7" kind="presentation" identifier="AddTask" id="7tU-XJ-1gA"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="edit" id="kek-n5-ZLP"/>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
@@ -394,7 +399,7 @@
             </objects>
             <point key="canvasLocation" x="2055" y="847"/>
         </scene>
-        <!--New/Edit Task-->
+        <!--New Task-->
         <scene sceneID="ZNB-Bh-8Hw">
             <objects>
                 <viewController id="0eN-57-SPP" customClass="TaskViewController" customModule="CheckTheList" customModuleProvider="target" sceneMemberID="viewController">
@@ -460,20 +465,11 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdY-kX-tdd">
-                                        <rect key="frame" x="131.5" y="392.5" width="92.5" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ2-G8-oso">
-                                        <rect key="frame" x="131" y="392.5" width="93" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmN-i9-3QB">
                                         <rect key="frame" x="166.5" y="396.5" width="22" height="22"/>
+                                        <connections>
+                                            <action selector="addParticipant:" destination="0eN-57-SPP" eventType="touchUpInside" id="g1Q-PM-s5p"/>
+                                        </connections>
                                     </button>
                                     <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-a0-BxN">
                                         <rect key="frame" x="0.0" y="422.5" width="355" height="100"/>
@@ -481,6 +477,13 @@
                                             <constraint firstAttribute="height" constant="100" id="Wz2-al-Pew"/>
                                         </constraints>
                                     </pickerView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNz-9D-tCN">
+                                        <rect key="frame" x="159" y="422.5" width="37" height="0.0"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="commitParticipant:" destination="0eN-57-SPP" eventType="touchUpInside" id="bbs-pD-fdN"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3y-z6-wcD">
                                         <rect key="frame" x="150.5" y="426.5" width="54" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -511,25 +514,33 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YEZ-bS-sXI"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New/Edit Task" id="uQZ-aI-LoY">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vzI-R0-QX3"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gVZ-JK-uiy"/>
+                    <navigationItem key="navigationItem" title="New Task" id="uQZ-aI-LoY">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="vzI-R0-QX3">
+                            <connections>
+                                <action selector="cancel:" destination="0eN-57-SPP" id="Kbp-oI-uWi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gVZ-JK-uiy">
+                            <connections>
+                                <segue destination="W2f-f1-kl5" kind="unwind" unwindAction="unwindToItemListWithSender:" id="NIR-AW-1Gw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cancel" destination="vzI-R0-QX3" id="hdB-pk-TDq"/>
+                        <outlet property="addParticipant" destination="AmN-i9-3QB" id="Zbx-He-ZFk"/>
                         <outlet property="cancelButton" destination="vzI-R0-QX3" id="Ffb-0D-8sd"/>
                         <outlet property="descrTextView" destination="XWL-Du-sL4" id="4yW-E4-xS0"/>
                         <outlet property="dueDatePicker" destination="Dkb-X0-Nr7" id="3Es-kX-aT6"/>
                         <outlet property="nameTextField" destination="rOC-el-n5T" id="WRX-h7-oGN"/>
                         <outlet property="optParticipant1" destination="pV2-uK-XKp" id="J5m-Ke-Qb3"/>
-                        <outlet property="optParticipant2" destination="LdY-kX-tdd" id="lSS-Ah-Q59"/>
-                        <outlet property="optParticipant3" destination="UJ2-G8-oso" id="P45-55-6v4"/>
                         <outlet property="participantPicker" destination="fKg-a0-BxN" id="SFa-dj-eBm"/>
                         <outlet property="saveButton" destination="gVZ-JK-uiy" id="oRI-Km-tYZ"/>
+                        <outlet property="selectParticipant" destination="gNz-9D-tCN" id="LgX-JN-HEV"/>
                         <outlet property="statusLabel" destination="Tvw-JN-cGK" id="YWa-Da-T5G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDs-dt-UNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="W2f-f1-kl5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3788" y="847"/>
         </scene>
@@ -549,7 +560,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpF-eh-mie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2884" y="847"/>
+            <point key="canvasLocation" x="2884" y="489"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="SFx-Co-hYt">
@@ -600,6 +611,7 @@
         <image name="person" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="v9W-3P-xew"/>
         <segue reference="qXS-3o-onu"/>
     </inferredMetricsTieBreakers>
 </document>
