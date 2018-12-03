@@ -8,12 +8,19 @@
 
 import UIKit
 import os.log
+import Firebase
+import FirebaseUI
+import GoogleSignIn
+import CoreData
+import Firebase
+import FirebaseAuth
 
 class ListTableViewController: UITableViewController {
 
     //MARK: Properties
-    
+    let db = Firestore.firestore()
     var lists = [List]()
+    var checklist : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -208,14 +215,46 @@ class ListTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSampleItems() {
-        guard let list1 = List(name: "Default item", descr: "Here are some notes", dueDate: Date(), participants: []) else {
-            fatalError("Unable to instantiate list item1")
+        // getting checklists
+        db.collection("Users").document(Auth.auth().currentUser!.email!)
+            .addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                let checklistItem = data["checklistId"] as? String ?? "none"
+                self.checklist.append(checklistItem)
+                print(self.checklist)
+             
+        }
+/*
+        db.collection("Cheklists").whereField("User", isEqualTo: Auth.auth().currentUser!.uid)
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+            let checklistName =  documents.map {$0["checklistName"]!}
+            let checklistDesc = documents.map {$0["description"]}
+            let dueDate = documents.map {$0["dueDate"]}
+            let users = documents.map{$0["participants"]}
+            
+           */
+            
+              /*  guard let newList = List(name: checklistName[$0 , descr: checklistDesc, dueDate: dueDate, participants: users) else {
+                 fatalError("Unable to instantiate list item1")
+                }
         }
         
-        guard let list2 = List(name: "Default item2", descr: "Here are some more notes", dueDate: Date(), participants: ["user1", "user2", "user3"]) else {
-            fatalError("Unable to instantiate list item2")
-        }
-        lists += [list1, list2]
+        
+       // self.lists.append(newList)
+        
+        */
+        
     }
     
     // Converts a Date object into a readable String
@@ -229,3 +268,4 @@ class ListTableViewController: UITableViewController {
     }
     
 }
+

@@ -9,6 +9,13 @@
 import UIKit
 import os.log
 
+import Firebase
+import FirebaseUI
+import GoogleSignIn
+import CoreData
+import Firebase
+import FirebaseAuth
+
 class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UINavigationControllerDelegate, UIPickerViewDataSource {
 
     //MARK: Properties

@@ -246,12 +246,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                     }
                 }
             }
-            
-          
-            
-            
-        
-            
          }
     }
     
