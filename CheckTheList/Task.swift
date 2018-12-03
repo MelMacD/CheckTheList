@@ -5,7 +5,6 @@
 //  Created by Melanie MacDonald on 2018-11-30.
 //  Copyright © 2018 Melanie MacDonald. All rights reserved.
 //
-//NOTE THIS IS TEMPORARY, the class attributes are subject to change
 
 import UIKit
 import os.log
@@ -18,9 +17,10 @@ class Task {
     var dueDate: Date
     var participants: [String]
     var status: String
+    var isCompleted: Bool
     
     //MARK: Initialization
-    init?(name: String, descr: String, dueDate: Date, participants: [String], status: String) {
+    init?(name: String, descr: String, dueDate: Date, participants: [String], status: String, isCompleted: Bool) {
         // Name and status must have a value
         guard !name.isEmpty else {
             return nil
@@ -33,8 +33,9 @@ class Task {
         self.name = name
         self.descr = descr
         self.dueDate = dueDate
-        self.participants = participants//??
+        self.participants = participants
         self.status = status
+        self.isCompleted = isCompleted
     }
     
     

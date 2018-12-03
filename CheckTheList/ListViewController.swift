@@ -161,25 +161,24 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     // Configure a view controller before it's presented
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     super.prepare(for: segue, sender: sender)
+        super.prepare(for: segue, sender: sender)
      
-     // Confgure the destination view controller only when save button is pressed
-     guard let button = sender as? UIBarButtonItem, button === saveButton else {
-     os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-     return
-     }
+        // Confgure the destination view controller only when save button is pressed
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
     
-     let name = nameTextField.text ?? ""
-     let descr = descrTextView.text ?? ""
-     let dueDate = dueDatePicker.date
-     var participants = optParticipant1.text?.components(separatedBy: "\n")
-    if optParticipant1.text == "None" {
-        participants = []
-    }
-     
+        let name = nameTextField.text ?? ""
+        let descr = descrTextView.text ?? ""
+        let dueDate = dueDatePicker.date
+        var participants = optParticipant1.text?.components(separatedBy: "\n")
+        if optParticipant1.text == "None" {
+            participants = []
+        }
      // Set the list to be passed to ListTableViewController after the unwind seque
      
-        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
+        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!, isCompleted: false)
         
     // breaking down participants from array into variables
     // considering we are limited to 4 participants

@@ -194,7 +194,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         // Set the list to be passed to ListTableViewController after the unwind seque
         
-        task = Task(name: name, descr: descr, dueDate: dueDate, participants: participants!, status: status)
+        task = Task(name: name, descr: descr, dueDate: dueDate, participants: participants!, status: status, isCompleted: false)
     }
     
     

@@ -163,10 +163,11 @@ class TaskTableViewController: UITableViewController {
         
     }
     
-    //TODO: when List class is updated to include completion
     func sortCompletion() {
-        let sortedList = tasks.sorted {_,_ in
-            return true
+        let sortedList = tasks.sorted {
+            let number1 = $0.isCompleted ? 1 : 0
+            let number2 = $1.isCompleted ? 1 : 0
+            return number1 < number2
         }
         tasks = sortedList
         self.tableView.reloadData()
@@ -205,12 +206,11 @@ class TaskTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSampleItems() {
-        guard let task1 = Task(name: "Default item", descr: "Here are some notes", dueDate: Date(), participants: [], status: "Available") else {
+        guard let task1 = Task(name: "Default item", descr: "Here are some notes", dueDate: Date(), participants: [], status: "Available", isCompleted: true) else {
             fatalError("Unable to instantiate list item1")
         }
         
-        guard let task2 = Task(name: "Default item2", descr: "Here are some more notes", dueDate: Date(), participants: ["user1", "user2", "user3"],
-                               status: "In progress") else {
+        guard let task2 = Task(name: "Default item2", descr: "Here are some more notes", dueDate: Date(), participants: ["user1", "user2", "user3"], status: "In progress", isCompleted: false) else {
             fatalError("Unable to instantiate list item2")
         }
         tasks += [task1, task2]

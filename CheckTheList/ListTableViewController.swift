@@ -173,10 +173,11 @@ class ListTableViewController: UITableViewController {
         
     }
     
-    //TODO: when List class is updated to include completion
     func sortCompletion() {
-        let sortedList = lists.sorted {_,_ in
-            return true
+        let sortedList = lists.sorted {
+            let number1 = $0.isCompleted ? 1 : 0
+            let number2 = $1.isCompleted ? 1 : 0
+            return number1 < number2
         }
         lists = sortedList
         self.tableView.reloadData()
