@@ -86,7 +86,7 @@ class TaskTableViewController: UITableViewController {
     // MARK: - Navigation
     @IBAction func cancel(_ sender: Any) {
         if let owningNavigationController = navigationController {
-        owningNavigationController.popViewController(animated: true)
+            owningNavigationController.popViewController(animated: true)
         }
         else {
             fatalError("The List View Controller is not inside a navigation controller")
@@ -138,6 +138,68 @@ class TaskTableViewController: UITableViewController {
             // Save the items
             //saveItems()
         }
+    }
+    
+    // TODO: Propagate this to Firebase when checked, should be marked completed
+    func toggleCompletion(_ cell : ListTableViewCell) {
+        cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
+        cell.isUserInteractionEnabled = false
+        cell.textLabel!.isEnabled = false
+        cell.alpha = 0.3
+    }
+    
+    @IBAction func markCompleted(_ sender: AnyObject?) {
+        let cell = (sender?.superview?.superview as? ListTableViewCell)!
+        if cell.completedFlag.image(for: .normal) == UIImage(named: "checked") {
+            return
+        }
+        let alert = UIAlertController(title: "Are you sure you want to continue?", message: "Marking the list completed will alert all participants and prevent any future changes.", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in self.toggleCompletion(cell)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
+        
+    }
+    
+    //TODO: when List class is updated to include completion
+    func sortCompletion() {
+        let sortedList = tasks.sorted {_,_ in
+            return true
+        }
+        tasks = sortedList
+        self.tableView.reloadData()
+    }
+    
+    func sortDueDate() {
+        let sortedList = tasks.sorted {
+            return $0.dueDate < $1.dueDate
+        }
+        tasks = sortedList
+        self.tableView.reloadData()
+    }
+    
+    func sortTitle() {
+        let sortedList = tasks.sorted {
+            return $0.name < $1.name
+        }
+        tasks = sortedList
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func sortOptionsDisplay(_ sender: Any) {
+        let alert = UIAlertController(title: "How would you like to sort?", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Sort by Completion", style: .default, handler: { action in self.sortCompletion()
+        }))
+        alert.addAction(UIAlertAction(title: "Sort by Due Date", style: .default, handler: { action in self.sortDueDate()
+        }))
+        alert.addAction(UIAlertAction(title: "Sort by Title", style: .default, handler: { action in self.sortTitle()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
     }
     
     //MARK: Private Methods

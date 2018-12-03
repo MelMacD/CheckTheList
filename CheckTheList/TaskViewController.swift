@@ -29,10 +29,13 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var addParticipant: UIButton!
     @IBOutlet weak var selectParticipant: UIButton!
+    @IBOutlet weak var statusPicker: UIPickerView!
     
     //Sample options for the pickers for testing purposes
     // TODO: load this as a model populated by values from Firebase
     let participantOptions = ["username1", "username2", "username3"]
+    
+    let statusOptions = ["Available", "In Progress", "Blocked"]
     
     // Controls whether passing in a new or preexisting task
     var task: Task?
@@ -41,8 +44,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        super.viewDidLoad()
+        
         nameTextField.delegate = self
         descrTextView.delegate = self
         participantPicker.delegate = self
@@ -65,6 +67,10 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
                 addParticipant.isHidden = true
             }
+            // Show status picker instead of label
+            statusLabel.isHidden = true
+            statusPicker.isHidden = false
+            statusPicker.selectRow(statusOptions.firstIndex(of: task.status)!, inComponent: 0, animated: true)
         } else {
             saveButton.isEnabled = false
             isEdit = false
@@ -116,12 +122,22 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     // Sets the number of options for the pickers as according to their tag values, and the number of elements in
     // their "options" arrays
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return participantOptions.count
+        if pickerView.tag == 1 {
+            return participantOptions.count
+        }
+        else {
+            return statusOptions.count
+        }
     }
     
     // Sets the values of the pickers as according to their tag values
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(participantOptions[row])"
+        if pickerView.tag == 1 {
+            return "\(participantOptions[row])"
+        }
+        else {
+            return "\(statusOptions[row])"
+        }
     }
     
     //MARK: Navigation
@@ -157,7 +173,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
-        
+        var status: String
         let name = nameTextField.text ?? ""
         let descr = descrTextView.text ?? ""
         let dueDate = dueDatePicker.date
@@ -165,7 +181,12 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         if optParticipant1.text == "None" {
             participants = []
         }
-        let status = statusLabel.text ?? ""
+        if isEdit! {
+            status = statusOptions[statusPicker.selectedRow(inComponent: 0)]
+        }
+        else {
+            status = statusLabel.text ?? ""
+        }
         let isPresentingInAddItemMode = presentingViewController is UINavigationController
         
         if isPresentingInAddItemMode {//??

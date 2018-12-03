@@ -176,10 +176,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     if optParticipant1.text == "None" {
         participants = []
     }
-    let isPresentingInAddItemMode = presentingViewController is UINavigationController
-     
-     if isPresentingInAddItemMode {//??
-     }
      
      // Set the list to be passed to ListTableViewController after the unwind seque
      
@@ -193,7 +189,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
    
         
     //KV :Saving into Firebase
-        
         // objects to add
         let docData: [String: Any] = [
             "User": Auth.auth().currentUser?.uid ?? "UID missing",

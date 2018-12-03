@@ -320,14 +320,6 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox" translatesAutoresizingMaskIntoConstraints="NO" id="Dp4-cb-IXm">
-                                            <rect key="frame" x="319" y="0.0" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="Dp4-cb-IXm" secondAttribute="height" multiplier="1:1" id="Bse-97-ffe" userLabel="aspect = 1:1"/>
-                                                <constraint firstAttribute="height" constant="40" id="Hb8-Yb-Hji"/>
-                                                <constraint firstAttribute="width" constant="40" id="n0Z-4f-AWk"/>
-                                            </constraints>
-                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJY-Ef-8xc">
                                             <rect key="frame" x="337" y="47" width="22" height="22"/>
                                             <constraints>
@@ -349,13 +341,24 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jau-rk-hjo">
+                                            <rect key="frame" x="319" y="0.0" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="BWY-LC-N9M"/>
+                                                <constraint firstAttribute="width" secondItem="jau-rk-hjo" secondAttribute="height" multiplier="1:1" id="OGb-8u-r18"/>
+                                                <constraint firstAttribute="width" constant="40" id="Phy-Wb-Lut"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="checkbox"/>
+                                            <connections>
+                                                <action selector="markCompleted:" destination="ahc-Sm-OqZ" eventType="touchUpInside" id="gxP-vW-lBd"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="7b7-dM-O0G" firstAttribute="top" secondItem="jau-rk-hjo" secondAttribute="bottom" constant="8" symbolic="YES" id="0BS-yy-LSb"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fCM-tP-DrO" secondAttribute="trailing" id="0Ux-yg-XFp"/>
+                                        <constraint firstItem="jau-rk-hjo" firstAttribute="width" secondItem="jau-rk-hjo" secondAttribute="height" multiplier="1:1" id="3iB-jZ-nkl"/>
                                         <constraint firstItem="eJY-Ef-8xc" firstAttribute="leading" secondItem="7b7-dM-O0G" secondAttribute="trailing" constant="8" id="6pv-3k-3XO"/>
-                                        <constraint firstItem="eJY-Ef-8xc" firstAttribute="top" secondItem="Dp4-cb-IXm" secondAttribute="bottom" constant="7" id="EcK-4r-w25"/>
-                                        <constraint firstItem="Dp4-cb-IXm" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="top" id="F53-7Z-49k"/>
-                                        <constraint firstAttribute="trailing" secondItem="Dp4-cb-IXm" secondAttribute="trailing" constant="16" id="KzR-RQ-nxz"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="top" secondItem="lfo-DS-O1w" secondAttribute="bottom" constant="16" id="NPh-aN-aly"/>
                                         <constraint firstItem="kpp-Ec-BDS" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="topMargin" constant="2" id="PhR-6X-lro"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="top" secondItem="kpp-Ec-BDS" secondAttribute="bottom" constant="7" id="SbU-EL-0Kx"/>
@@ -365,15 +368,16 @@
                                         <constraint firstItem="fCM-tP-DrO" firstAttribute="bottom" secondItem="OZo-9q-5vh" secondAttribute="bottomMargin" id="cdM-Xq-ryZ"/>
                                         <constraint firstItem="fCM-tP-DrO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OZo-9q-5vh" secondAttribute="leading" constant="20" symbolic="YES" id="cvF-eg-OtU"/>
                                         <constraint firstItem="lfo-DS-O1w" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="topMargin" id="f1G-od-v0O"/>
+                                        <constraint firstItem="jau-rk-hjo" firstAttribute="trailing" secondItem="eJY-Ef-8xc" secondAttribute="trailing" id="jv7-Ws-uDZ"/>
                                         <constraint firstItem="eJY-Ef-8xc" firstAttribute="trailing" secondItem="OZo-9q-5vh" secondAttribute="trailingMargin" id="mfw-sp-dQK"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="top" secondItem="kpp-Ec-BDS" secondAttribute="bottom" constant="7" id="nB8-2L-xcm"/>
                                         <constraint firstItem="lfo-DS-O1w" firstAttribute="leading" secondItem="OZo-9q-5vh" secondAttribute="leadingMargin" id="oRi-KA-J2S"/>
+                                        <constraint firstItem="jau-rk-hjo" firstAttribute="leading" secondItem="kpp-Ec-BDS" secondAttribute="trailing" constant="8" id="uCH-WK-QPf"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="leading" secondItem="OZo-9q-5vh" secondAttribute="leadingMargin" id="utv-BA-InU"/>
-                                        <constraint firstItem="Dp4-cb-IXm" firstAttribute="leading" secondItem="kpp-Ec-BDS" secondAttribute="trailing" constant="8" id="xZx-Ed-8tX"/>
+                                        <constraint firstItem="eJY-Ef-8xc" firstAttribute="top" secondItem="jau-rk-hjo" secondAttribute="bottom" constant="7" id="wUg-Hm-8n5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="completedFlag" destination="Dp4-cb-IXm" id="FHf-U5-Xqh"/>
                                     <outlet property="infoButton" destination="eJY-Ef-8xc" id="36t-mD-PPe"/>
                                     <outlet property="participantFlag" destination="kpp-Ec-BDS" id="eac-WS-Ji3"/>
                                     <outlet property="taskDueDate" destination="7b7-dM-O0G" id="bzu-wb-8YV"/>
@@ -399,6 +403,11 @@
                             <barButtonItem systemItem="add" id="Rap-p9-bkM">
                                 <connections>
                                     <segue destination="mGv-Kg-Bd7" kind="presentation" identifier="AddTask" id="7tU-XJ-1gA"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Sort" id="biD-ws-J05">
+                                <connections>
+                                    <action selector="sortOptionsDisplay:" destination="ahc-Sm-OqZ" id="Gmk-N6-7fC"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -480,10 +489,10 @@
                                             <action selector="addParticipant:" destination="0eN-57-SPP" eventType="touchUpInside" id="g1Q-PM-s5p"/>
                                         </connections>
                                     </button>
-                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-a0-BxN">
-                                        <rect key="frame" x="0.0" y="422.5" width="355" height="100"/>
+                                    <pickerView hidden="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-a0-BxN">
+                                        <rect key="frame" x="0.0" y="422.5" width="355" height="80"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="Wz2-al-Pew"/>
+                                            <constraint firstAttribute="height" constant="80" id="Wz2-al-Pew"/>
                                         </constraints>
                                     </pickerView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNz-9D-tCN">
@@ -505,6 +514,12 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <pickerView hidden="YES" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Iy-TL-9Zp">
+                                        <rect key="frame" x="17.5" y="475.5" width="320" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="SZK-KT-Xbc"/>
+                                        </constraints>
+                                    </pickerView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fKg-a0-BxN" firstAttribute="leading" secondItem="iyX-cb-Hfb" secondAttribute="leading" id="A09-CR-eRk"/>
@@ -546,6 +561,7 @@
                         <outlet property="saveButton" destination="gVZ-JK-uiy" id="oRI-Km-tYZ"/>
                         <outlet property="selectParticipant" destination="gNz-9D-tCN" id="LgX-JN-HEV"/>
                         <outlet property="statusLabel" destination="Tvw-JN-cGK" id="YWa-Da-T5G"/>
+                        <outlet property="statusPicker" destination="2Iy-TL-9Zp" id="tc6-W5-anX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDs-dt-UNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -620,7 +636,7 @@
         <image name="person" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="afy-2Q-v70"/>
+        <segue reference="v9W-3P-xew"/>
         <segue reference="qXS-3o-onu"/>
     </inferredMetricsTieBreakers>
 </document>
