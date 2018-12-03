@@ -154,48 +154,45 @@ class ListTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSampleItems() {
-        // getting checklists
-        db.collection("Users").document(Auth.auth().currentUser!.email!)
-            .addSnapshotListener { documentSnapshot, error in
+        
+       // db.collection("Users").document("melanie@melanie.com")
+       
+            
+            /*.addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
                     print("Error fetching document: \(error!)")
                     return
                 }
-                guard let data = document.data() else {
+                guard let data = snapshot.data() else {
                     print("Document data was empty.")
                     return
+                }*/
+                
+        db.collection("Users").whereField("checklistId", isGreaterThan: "pqpppppppppwpwppwpwppwppwpwpwppwpwpwppwpwpwppwpwpwpwpwppwpwpwppwpwpwppwp").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    print(11111111111111111)
                 }
-                let checklistItem = data["checklistId"] as? String ?? "none"
-                self.checklist.append(checklistItem)
-                print(self.checklist)
-             
-        }
-/*
-        db.collection("Cheklists").whereField("User", isEqualTo: Auth.auth().currentUser!.uid)
-            .addSnapshotListener { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
-                    return
-                }
-            let checklistName =  documents.map {$0["checklistName"]!}
-            let checklistDesc = documents.map {$0["description"]}
-            let dueDate = documents.map {$0["dueDate"]}
-            let users = documents.map{$0["participants"]}
+            }
             
-           */
-            
-              /*  guard let newList = List(name: checklistName[$0 , descr: checklistDesc, dueDate: dueDate, participants: users) else {
-                 fatalError("Unable to instantiate list item1")
-                }
         }
         
         
+ 
+      /*  guard let newList = List(name: checklistName[$0 , descr: checklistDesc, dueDate: dueDate, participants: users) else {
+         fatalError("Unable to instantiate list item1")
+            }
+        }
        // self.lists.append(newList)
         
         */
         
     }
-    
+
+}
     // Converts a Date object into a readable String
     func convertDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -205,6 +202,5 @@ class ListTableViewController: UITableViewController {
         dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: date)
     }
-    
-}
+
 

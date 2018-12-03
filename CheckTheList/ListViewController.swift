@@ -189,8 +189,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     // breaking down participants from array into variables
     // considering we are limited to 4 participants
     
+    participants?.append(Auth.auth().currentUser!.email!)
     
-        
+   
         
     //KV :Saving into Firebase
         
@@ -207,8 +208,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             
         ]
         let docData1: [String: Any] = [
-            "checklistId" : uuid,
-            
+                "checklistId" : uuid,
+
             ]
         
         // add the checklist into checklist collection
@@ -221,31 +222,15 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             }
         }
         
-        
-        // add the checklist reference in user collection
-        
-        db.collection("Users").document(Auth.auth().currentUser!.email!).setData(docData1){
-            err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("sharing with user Document successfully written!")
-                
-            }
-        }
+    
         if (participants!.count > 0) {
             for participant in participants!{
                 
                 // add the checklist reference in shared collection
-                db.collection("Users").document(participant).setData(docData1){
-                    err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("sharing with user Document successfully written!")
-                        
-                    }
-                }
+                db.collection("Users").document(participant).updateData([
+                    "checklistId ": FieldValue.arrayUnion([ uuid])
+                    ])
+                
             }
          }
     }
