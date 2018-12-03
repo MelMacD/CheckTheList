@@ -225,6 +225,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="u3c-lk-MwE">
                             <connections>
+                                <action selector="saveChecklist:" destination="bAo-Jk-k90" id="s2J-BG-Yq2"/>
                                 <segue destination="O0J-Ss-n3m" kind="unwind" unwindAction="unwindToItemListWithSender:" id="yJV-d1-ZrK"/>
                             </connections>
                         </barButtonItem>
@@ -249,10 +250,7 @@
         <!--Navigation Controller-->
         <scene sceneID="eDJ-An-05B">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xjj-rG-aSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-
                 <navigationController storyboardIdentifier="tableViewVC" automaticallyAdjustsScrollViewInsets="NO" id="ljn-0s-ATb" sceneMemberID="viewController">
-
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HCc-rm-yWf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -263,10 +261,9 @@
                         <segue destination="U18-ca-p9F" kind="relationship" relationship="rootViewController" id="hJX-qY-oAH"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xjj-rG-aSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="673" y="27"/>
-
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VZD-PX-FDJ">
@@ -595,13 +592,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3D-LS-Jei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="-345" y="27"/>
-
         </scene>
     </scenes>
     <resources>
-        <image name="checkbox" width="490" height="490"/>
+        <image name="checkbox" width="980" height="980"/>
         <image name="person" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>

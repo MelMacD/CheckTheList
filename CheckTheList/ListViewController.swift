@@ -28,21 +28,38 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet weak var addParticipant: UIButton!
     @IBOutlet weak var selectParticipant: UIButton!
     
-    //Sample options for the pickers for testing purposes
-    let participantOptions = ["username1", "username2", "username3"]
+    //MARK: Firebase variables
+    let db = Firestore.firestore()
+    let uuid = NSUUID().uuidString.lowercased()
+    
+    
+    var participantOptions : [String] = []
     
 
     // Controls whether passing in a new or preexisting list
     var checklist: List?
     
     var isEdit: Bool?
+
+    
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //generating a new unique identifier to add a new checklist everytime
+        
+        
+        // kv: update participants from firebase into the the array participantOptions
+        getUserFromUserList()
+       
+        
+        
         nameTextField.delegate = self
         descrTextView.delegate = self
         participantPicker.delegate = self
         participantPicker.dataSource = self
+
         
         //Create a black border around the description text view
         descrTextView.layer.borderWidth = 1
@@ -64,15 +81,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             saveButton.isEnabled = false
             isEdit = false
         }
-        
-
-        
-        
-        var  User = Auth.auth().currentUser!
-        
-        print(User.displayName)
-        
-        
         
     }
     
@@ -162,7 +170,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
      return
      }
-     
+    
      let name = nameTextField.text ?? ""
      let descr = descrTextView.text ?? ""
      let dueDate = dueDatePicker.date
@@ -178,10 +186,103 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      // Set the list to be passed to ListTableViewController after the unwind seque
      
         checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
-     }
+        
+    // breaking down participants from array into variables
+    // considering we are limited to 4 participants
+    
+    
+        
+        
+    //KV :Saving into Firebase
+        
+        // objects to add
+        let docData: [String: Any] = [
+            "User": Auth.auth().currentUser?.uid ?? "UID missing",
+            "checklistName": name,
+            "status": false,
+            "description": descr,
+            "dueDate": dueDate,
+            "dateCreated" : NSDate(),
+            "participants" : participants!,
+            "checklistId" : uuid,
+            
+        ]
+        let docData1: [String: Any] = [
+            "checklistId" : uuid,
+            
+            ]
+        
+        // add the checklist into checklist collection
+        db.collection("Cheklists").document(uuid).setData(docData) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("New Checklist Document successfully written!")
+                
+            }
+        }
+        
+        
+        // add the checklist reference in user collection
+        
+        db.collection("Users").document().collection("checklistSharing").document(Auth.auth().currentUser!.email!).setData(docData1){
+            err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("sharing with user Document successfully written!")
+                
+            }
+        }
+        if (participants!.count > 0) {
+            for participant in participants!{
+                
+                // add the checklist reference in shared collection
+                db.collection("Users").document().collection("checklistSharing").document(participant).setData(docData1){
+                    err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("sharing with user Document successfully written!")
+                        
+                    }
+                }
+            }
+            
+          
+            
+            
+        
+            
+         }
+    }
     
     //MARK: Custom Functions
     
+    func getUserFromUserList(){
+        
+        db.collection("Userlist")
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        
+                        let email = data["email"] as? String ?? "none"
+                        self.participantOptions.append(email)
+                        
+                    }
+                    
+                }
+                
+        }
+    }
+    
+    @IBAction func saveChecklist(_ sender: UIBarButtonItem) {
+        
+        
+    }
     @IBAction func addParticipant(_ sender: Any) {
         participantPicker.isHidden = false
         selectParticipant.isHidden = false
@@ -204,5 +305,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             addParticipant.isHidden = true
         }
     }
-}
+    
+  
 
+}
