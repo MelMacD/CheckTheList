@@ -52,7 +52,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         // kv: update participants from firebase into the the array participantOptions
         getUserFromUserList()
         
+       
         
+        print(self.participantOptions)
         nameTextField.delegate = self
         descrTextView.delegate = self
         participantPicker.delegate = self
@@ -222,7 +224,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         // add the checklist reference in user collection
         
-        db.collection("Users").document().collection("checklistSharing").document(Auth.auth().currentUser!.email!).setData(docData1){
+        db.collection("Users").document(Auth.auth().currentUser!.email!).setData(docData1){
             err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -235,7 +237,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             for participant in participants!{
                 
                 // add the checklist reference in shared collection
-                db.collection("Users").document().collection("checklistSharing").document(participant).setData(docData1){
+                db.collection("Users").document(participant).setData(docData1){
                     err in
                     if let err = err {
                         print("Error writing document: \(err)")
@@ -268,7 +270,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                         
                         let email = data["email"] as? String ?? "none"
                         self.participantOptions.append(email)
-                        
+                        print(self.participantOptions)
                     }
                     
                 }
