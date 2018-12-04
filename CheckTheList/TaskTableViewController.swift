@@ -8,6 +8,12 @@
 
 import UIKit
 import os.log
+import Firebase
+import FirebaseUI
+import GoogleSignIn
+import CoreData
+import Firebase
+import FirebaseAuth
 
 class TaskTableViewController: UITableViewController {
 
@@ -16,7 +22,16 @@ class TaskTableViewController: UITableViewController {
     // this is sent from the ListTableViewController
     var checklist: List?
     
+    let db = Firestore.firestore()
+    
+    var taskName:String = ""
+    var taskDesc:String = ""
+    var taskDueDate:Timestamp = Timestamp.init()
+    var date : Date = Date()
+    var userP : [String] = []
+    
     var tasks = [Task]()
+    
     
     var checklistID: String  = ""
     
@@ -27,7 +42,13 @@ class TaskTableViewController: UITableViewController {
         
         // TODO: display saved items from firebase
         loadSampleItems()
+        
+        
     }
+    
+    
+   
+    
 
     // MARK: - Table view data source
 
@@ -58,11 +79,13 @@ class TaskTableViewController: UITableViewController {
         
         cell.taskName.text = task.name
         cell.taskDueDate.text = convertDateToString(date: task.dueDate)
-        if task.participants.count == 0 {
-            cell.participantFlag.isHidden = true
-        }
-        cell.taskStatus.text = task.status
+       // if task.participants.count == 0 {
+        //cell.participantFlag.isHidden = true
+        //}
+     //   cell.taskStatus.text = task.status
+        
         //TODO: Handling for completion
+        
         
         return cell
     }
@@ -78,7 +101,12 @@ class TaskTableViewController: UITableViewController {
         if editingStyle == .delete {
             //TODO: Check here if list is complete, prompt user if they are sure if it isn't
             // Delete the row from the data source
+            let task = tasks[indexPath.row]
+            print(task.taskId)
+            deleteTask(checklistId: task.taskId)
+            
             tasks.remove(at: indexPath.row)
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
             //save items
         } else if editingStyle == .insert {
@@ -103,7 +131,13 @@ class TaskTableViewController: UITableViewController {
         switch(segue.identifier ?? "") {
         case "AddTask":
             
-            os_log("Adding a new checklist", log: OSLog.default, type: .debug)
+            
+           
+            
+            // Create a new variable to store the instance of PlayerTableViewController
+            let destinationVC = segue.destination as! TaskViewController
+            destinationVC.checklistId = self.checklistID
+         
             
             
         case "EditTask":
@@ -133,11 +167,15 @@ class TaskTableViewController: UITableViewController {
             task = sourceViewController.task {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing item
+                self.tasks.removeAll()
+                loadSampleItems()
                 tasks[selectedIndexPath.row] = task
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
                 // Add a new item
+                self.tasks.removeAll()
+                loadSampleItems()
                 let newIndexPath = IndexPath(row: tasks.count, section: 0)
                 tasks.append(task)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
@@ -214,17 +252,29 @@ class TaskTableViewController: UITableViewController {
     
     private func loadSampleItems() {
         
-        
-        
-        
-        guard let task1 = Task(name: "Default item", descr: "Here are some notes", dueDate: Date(), participants: [], status: "Available", isCompleted: true) else {
-            fatalError("Unable to instantiate list item1")
+        db.collection("Cheklists").document(checklistID).collection("shareTask").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    var data = document.data()
+                    self.taskName = data["taskName"] as! String
+                    self.taskDueDate = data["dueDate"] as! Timestamp
+                    self.taskDesc = data["description"] as! String
+                    var taskId = data["taskId"] as! String
+                    self.date = self.taskDueDate.dateValue()
+                    
+                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , isCompleted: true, taskId : taskId) else {
+                        fatalError("Unable to instantiate list item1")
+                    }
+                    self.tasks.append(task1)
+                     self.tableView.reloadData()
+                }
+            }
         }
         
-        
-        tasks.append(task1)
-    }
     
+        }
     // Converts a Date object into a readable String
     func convertDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -234,4 +284,26 @@ class TaskTableViewController: UITableViewController {
         dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: date)
     }
+    func deleteTask(checklistId:String){
+        
+        db.collection("Cheklists").document(self.checklistID).collection("shareTask").whereField("taskId", isEqualTo: checklistId)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        self.db.collection("Checklist").document(checklistId).collection("shareTask") .document(document.documentID).delete(){ err in
+                            if let err = err {
+                                print("Error removing document: \(err)")
+                            } else {
+                                print("Document successfully removed!")
+                            }
+                        }
+                    }
+                }
+        }
+        
+        
 }
+}
+

@@ -402,7 +402,7 @@
                             <barButtonItem systemItem="edit" id="kek-n5-ZLP"/>
                             <barButtonItem systemItem="add" id="Rap-p9-bkM">
                                 <connections>
-                                    <segue destination="mGv-Kg-Bd7" kind="presentation" identifier="AddTask" id="7tU-XJ-1gA"/>
+                                    <segue destination="0eN-57-SPP" kind="show" identifier="AddTask" id="13u-1D-cav"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Sort" id="biD-ws-J05">
@@ -556,36 +556,20 @@
                         <outlet property="descrTextView" destination="XWL-Du-sL4" id="4yW-E4-xS0"/>
                         <outlet property="dueDatePicker" destination="Dkb-X0-Nr7" id="3Es-kX-aT6"/>
                         <outlet property="nameTextField" destination="rOC-el-n5T" id="WRX-h7-oGN"/>
+                        <outlet property="noneLabel" destination="pV2-uK-XKp" id="blH-r5-OOA"/>
                         <outlet property="optParticipant1" destination="pV2-uK-XKp" id="J5m-Ke-Qb3"/>
+                        <outlet property="participantLabel" destination="CVF-7S-2do" id="lxp-KQ-v90"/>
                         <outlet property="participantPicker" destination="fKg-a0-BxN" id="SFa-dj-eBm"/>
                         <outlet property="saveButton" destination="gVZ-JK-uiy" id="oRI-Km-tYZ"/>
                         <outlet property="selectParticipant" destination="gNz-9D-tCN" id="LgX-JN-HEV"/>
-                        <outlet property="statusLabel" destination="Tvw-JN-cGK" id="YWa-Da-T5G"/>
                         <outlet property="statusPicker" destination="2Iy-TL-9Zp" id="tc6-W5-anX"/>
+                        <outlet property="statusTextLabel" destination="n3y-z6-wcD" id="vJB-AO-0bw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDs-dt-UNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="W2f-f1-kl5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3788" y="847"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pgG-rS-RHH">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mGv-Kg-Bd7" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2yW-v6-MH4">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="0eN-57-SPP" kind="relationship" relationship="rootViewController" id="afy-2Q-v70"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wpF-eh-mie" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2884" y="489"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="SFx-Co-hYt">
@@ -636,7 +620,7 @@
         <image name="person" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v9W-3P-xew"/>
+        <segue reference="13u-1D-cav"/>
         <segue reference="qXS-3o-onu"/>
     </inferredMetricsTieBreakers>
 </document>

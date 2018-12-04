@@ -15,27 +15,27 @@ class Task {
     var name: String
     var descr: String
     var dueDate: Date
-    var participants: [String]
-    var status: String
+  //  var participants: [String]
+   // var status: String
     var isCompleted: Bool
+    var taskId : String
     
     //MARK: Initialization
-    init?(name: String, descr: String, dueDate: Date, participants: [String], status: String, isCompleted: Bool) {
+    init?(name: String, descr: String, dueDate: Date, isCompleted: Bool, taskId : String) {
         // Name and status must have a value
         guard !name.isEmpty else {
             return nil
         }
-        guard !status.isEmpty else {
-            return nil
-        }
+        
         
         // Initialize with given values
         self.name = name
         self.descr = descr
         self.dueDate = dueDate
-        self.participants = participants
-        self.status = status
+       // self.participants = participants
+        //self.status = status
         self.isCompleted = isCompleted
+        self.taskId = taskId
     }
     
     

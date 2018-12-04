@@ -24,12 +24,18 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var optParticipant1: UILabel!
     @IBOutlet weak var participantPicker: UIPickerView!
-    @IBOutlet weak var statusLabel: UILabel!
+   // @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var addParticipant: UIButton!
     @IBOutlet weak var selectParticipant: UIButton!
     @IBOutlet weak var statusPicker: UIPickerView!
+    
+
+    @IBOutlet weak var participantLabel: UILabel!
+    @IBOutlet weak var noneLabel: UILabel!
+    
+    @IBOutlet weak var statusTextLabel: UILabel!
     
     //Sample options for the pickers for testing purposes
     // TODO: load this as a model populated by values from Firebase
@@ -57,6 +63,12 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         descrTextView.delegate = self
         participantPicker.delegate = self
         participantPicker.dataSource = self
+        addParticipant.isHidden = true
+        statusPicker.isHidden = true
+      //  statusLabel.isHidden = true
+        participantLabel.isHidden = true
+        noneLabel.isHidden = true
+        statusTextLabel.isHidden = true
         
         //Create a black border around the description text view
         descrTextView.layer.borderWidth = 1
@@ -68,17 +80,17 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             nameTextField.text = task.name
             descrTextView.text = task.descr
             dueDatePicker.setDate(task.dueDate, animated: true)
-            statusLabel.text = task.status
-            if task.participants.count != 0 {
+           // statusLabel.text = task.status
+            /*if task.participants.count != 0 {
                 optParticipant1.text = task.participants.compactMap({$0}).joined(separator: ", ")
-            }
+            }*/
             if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
                 addParticipant.isHidden = true
             }
             // Show status picker instead of label
-            statusLabel.isHidden = true
+          //  statusLabel.isHidden = true
             statusPicker.isHidden = false
-            statusPicker.selectRow(statusOptions.firstIndex(of: task.status)!, inComponent: 0, animated: true)
+           // statusPicker.selectRow(statusOptions.firstIndex(of: task.status)!, inComponent: 0, animated: true)
         } else {
             saveButton.isEnabled = false
             isEdit = false
@@ -193,7 +205,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             status = statusOptions[statusPicker.selectedRow(inComponent: 0)]
         }
         else {
-            status = statusLabel.text ?? ""
+           // status = statusLabel.text ?? ""
         }
         let isPresentingInAddItemMode = presentingViewController is UINavigationController
         
@@ -205,15 +217,16 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         //task = Task(name: name, descr: descr, dueDate: dueDate, participants: participants!, status: status, isCompleted: false)
         
         let docData: [String: Any] = [
-            "User": Auth.auth().currentUser?.uid ?? "UID missing",
+            //"User": Auth.auth().currentUser?.uid ?? "UID missing",
             
             "taskName": name,
-            "status": false,
+           // "status": false,
             "description": descr,
             "dueDate": dueDate,
             "dateCreated" : NSDate(),
-            "participants" : participants!,
+           // "participants" : participants!,
             "taskId" : uuid,
+            "status": true,
             
             ]
         let docData1: [String: Any] = [
@@ -222,7 +235,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             ]
         
         // add the checklist into checklist collection
-        db.collection("Tasks").document(uuid).setData(docData) { err in
+        db.collection("Cheklists").document(checklistId).collection("shareTask").document().setData(docData) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -232,10 +245,10 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         }
         
         
-        if (participants!.count > 0) {
+       /* if (participants!.count > 0) {
             for participant in participants!{
                 
-                db.collection("Users").document(participant).collection("sharedChecklist").document().setData(docData1) { err in
+                db.collection("Checklist").document(checklistId).collection("sharedTaks").document().setData(docData1) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
@@ -244,9 +257,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                     }
                 }
                 
-                
             }
-        }
+        }*/
     
     
     }
@@ -266,12 +278,13 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                         
                         let email = data["email"] as? String ?? "none"
                         self.participantOptions.append(email)
+                        print(self.participantOptions)
                     }
                     
                 }
                 
         }
-        
+        print(self.participantOptions)
         self.participantPicker.reloadAllComponents()
     }
     
@@ -289,13 +302,15 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             optParticipant1.text = participantOptions[participantPicker.selectedRow(inComponent: 0)]
         }
         else {
-            var participants = optParticipant1.text?.components(separatedBy: ", ")
+            var participants = optParticipant1.text?.components(separatedBy: "\n")
             participants!.append(participantOptions[participantPicker.selectedRow(inComponent: 0)])
-            optParticipant1.text = participants.flatMap({$0})!.joined(separator: ", ")
+            optParticipant1.text = participants.flatMap({$0})!.joined(separator: "\n")
         }
         
-        if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
+        if optParticipant1.text?.components(separatedBy: "\n").count == 3 {
             addParticipant.isHidden = true
         }
+        self.participantOptions = participantOptions.filter {$0 != participantOptions[participantPicker.selectedRow(inComponent: 0)]}
     }
+    
 }

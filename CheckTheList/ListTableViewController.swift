@@ -246,7 +246,7 @@ class ListTableViewController: UITableViewController {
     private func loadSampleItems() {
         
         
-        
+       
         //var check : [String] = []
         db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
             .addSnapshotListener { querySnapshot, error in
