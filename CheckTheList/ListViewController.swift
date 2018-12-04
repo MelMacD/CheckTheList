@@ -168,7 +168,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
      return
      }
-    
+   
      let name = nameTextField.text ?? ""
      let descr = descrTextView.text ?? ""
      let dueDate = dueDatePicker.date
@@ -183,8 +183,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      
      // Set the list to be passed to ListTableViewController after the unwind seque
      
-        checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
-        
+      // checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
+    
     // breaking down participants from array into variables
     // considering we are limited to 4 participants
     
@@ -195,7 +195,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     //KV :Saving into Firebase
         
         // objects to add
-        let docData: [String: Any] = [
+       let docData: [String: Any] = [
             "User": Auth.auth().currentUser?.uid ?? "UID missing",
             "checklistName": name,
             "status": false,
@@ -207,7 +207,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             
         ]
         let docData1: [String: Any] = [
-                "checklistId" : uuid,
+                "checklistID" : uuid,
 
             ]
         
@@ -224,11 +224,16 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
         if (participants!.count > 0) {
             for participant in participants!{
-                
-                // add the checklist reference in shared collection
-                db.collection("Users").document(participant).updateData([
-                    "checklistId ": FieldValue.arrayUnion([ uuid])
-                    ])
+ 
+                db.collection("Users").document(participant).collection("sharedChecklist").document().setData(docData1) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("New Checklist Document successfully written!")
+                        
+                    }
+                }
+            
                 
             }
          }
@@ -253,6 +258,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                 }
                 
         }
+        
         self.participantPicker.reloadAllComponents()
     }
     

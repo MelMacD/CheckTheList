@@ -17,9 +17,10 @@ class List {
     var descr: String
     var dueDate: Date
     var participants: [String]
+    var listId : String
     
     //MARK: Initialization
-    init?(name: String, descr: String, dueDate: Date, participants: [String]) {
+    init?(name: String, descr: String, dueDate: Date, participants: [String], listId : String) {
         // Name must have a value
         guard !name.isEmpty else {
             return nil
@@ -30,6 +31,7 @@ class List {
         self.descr = descr
         self.dueDate = dueDate
         self.participants = participants//??
+        self.listId = listId
     }
 
 }
