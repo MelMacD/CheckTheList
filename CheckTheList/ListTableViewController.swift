@@ -145,8 +145,8 @@ class ListTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            //let selectedItem = lists[indexPath.row]
-            //tasksViewController.checklist = selectedItem
+            let selectedItem = lists[indexPath.row].listId
+            tasksViewController.checklistID = selectedItem
         default:
             fatalError("Unexpected Segue Identifer; \(String(describing: segue.identifier))")
         }
@@ -254,9 +254,9 @@ class ListTableViewController: UITableViewController {
                     print("Error fetching documents: \(error!)")
                     return
                 }
-                self.tableView.reloadData()
+               
                 let values = documents.map{$0["checklistID"]!}
-               self.checklist.removeAll()
+               
                 for value in values {
                     let x = value as! String
                     
@@ -290,9 +290,10 @@ class ListTableViewController: UITableViewController {
                             
                             self.date = self.checklistDueDate.dateValue()
                             
-                            guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date , participants: self.userP, listId : data["checklistId"] as! String) else {
+                            guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: self.userP, isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
                                 fatalError("Unable to instantiate list item2")
                             }
+                            
                             
                             // print(checklistName,checklistDesc, date, userP)
                             

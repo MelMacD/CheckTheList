@@ -16,11 +16,11 @@ class List {
     var descr: String
     var dueDate: Date
     var participants: [String]
-
+    var isCompleted: Bool
     var listId : String
     
     //MARK: Initialization
-    init?(name: String, descr: String, dueDate: Date, participants: [String], listId : String) {
+    init?(name: String, descr: String, dueDate: Date, participants: [String], isCompleted: Bool, listId : String) {
 
         // Name must have a value
         guard !name.isEmpty else {
@@ -34,6 +34,7 @@ class List {
 
         self.participants = participants//??
         self.listId = listId
+        self.isCompleted = isCompleted
 
     }
 

@@ -632,7 +632,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkbox" width="490" height="490"/>
+        <image name="checkbox" width="980" height="980"/>
         <image name="person" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>

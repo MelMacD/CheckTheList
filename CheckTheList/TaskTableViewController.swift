@@ -15,11 +15,14 @@ class TaskTableViewController: UITableViewController {
     
     // this is sent from the ListTableViewController
     var checklist: List?
+    
     var tasks = [Task]()
+    
+    var checklistID: String  = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(checklistID)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // TODO: display saved items from firebase
@@ -99,7 +102,10 @@ class TaskTableViewController: UITableViewController {
         
         switch(segue.identifier ?? "") {
         case "AddTask":
+            
             os_log("Adding a new checklist", log: OSLog.default, type: .debug)
+            
+            
         case "EditTask":
             guard let tasksViewController = segue.destination as? TaskViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
@@ -120,6 +126,7 @@ class TaskTableViewController: UITableViewController {
         }
     }
 
+    
     //MARK: Actions
     @IBAction func unwindToItemList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? TaskViewController, let
@@ -206,14 +213,16 @@ class TaskTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSampleItems() {
+        
+        
+        
+        
         guard let task1 = Task(name: "Default item", descr: "Here are some notes", dueDate: Date(), participants: [], status: "Available", isCompleted: true) else {
             fatalError("Unable to instantiate list item1")
         }
         
-        guard let task2 = Task(name: "Default item2", descr: "Here are some more notes", dueDate: Date(), participants: ["user1", "user2", "user3"], status: "In progress", isCompleted: false) else {
-            fatalError("Unable to instantiate list item2")
-        }
-        tasks += [task1, task2]
+        
+        tasks.append(task1)
     }
     
     // Converts a Date object into a readable String

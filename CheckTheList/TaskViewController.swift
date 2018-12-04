@@ -33,9 +33,16 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     //Sample options for the pickers for testing purposes
     // TODO: load this as a model populated by values from Firebase
-    let participantOptions = ["username1", "username2", "username3"]
+    
     
     let statusOptions = ["Available", "In Progress", "Blocked"]
+    
+    let db = Firestore.firestore()
+    let uuid = NSUUID().uuidString.lowercased()
+    var checklistId : String = ""
+    
+    
+    var participantOptions : [String] = []
     
     // Controls whether passing in a new or preexisting task
     var task: Task?
@@ -44,6 +51,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(checklistId)
         
         nameTextField.delegate = self
         descrTextView.delegate = self
@@ -194,11 +202,79 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         // Set the list to be passed to ListTableViewController after the unwind seque
         
-        task = Task(name: name, descr: descr, dueDate: dueDate, participants: participants!, status: status, isCompleted: false)
+        //task = Task(name: name, descr: descr, dueDate: dueDate, participants: participants!, status: status, isCompleted: false)
+        
+        let docData: [String: Any] = [
+            "User": Auth.auth().currentUser?.uid ?? "UID missing",
+            
+            "taskName": name,
+            "status": false,
+            "description": descr,
+            "dueDate": dueDate,
+            "dateCreated" : NSDate(),
+            "participants" : participants!,
+            "taskId" : uuid,
+            
+            ]
+        let docData1: [String: Any] = [
+            "taskID" : uuid,
+            
+            ]
+        
+        // add the checklist into checklist collection
+        db.collection("Tasks").document(uuid).setData(docData) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("New Checklist Document successfully written!")
+                
+            }
+        }
+        
+        
+        if (participants!.count > 0) {
+            for participant in participants!{
+                
+                db.collection("Users").document(participant).collection("sharedChecklist").document().setData(docData1) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("New Checklist Document successfully written!")
+                        
+                    }
+                }
+                
+                
+            }
+        }
+    
+    
     }
     
     
     //MARK: Custom Functions
+    
+    func getUserFromUserList(){
+        
+        db.collection("Userlist")
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        
+                        let email = data["email"] as? String ?? "none"
+                        self.participantOptions.append(email)
+                    }
+                    
+                }
+                
+        }
+        
+        self.participantPicker.reloadAllComponents()
+    }
+    
     
     @IBAction func addParticipant(_ sender: Any) {
         participantPicker.isHidden = false
