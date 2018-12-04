@@ -5,7 +5,6 @@
 //  Created by Melanie MacDonald on 2018-11-30.
 //  Copyright © 2018 Melanie MacDonald. All rights reserved.
 //
-//NOTE THIS IS TEMPORARY, the class attributes are subject to change
 
 import UIKit
 import os.log
@@ -17,10 +16,12 @@ class List {
     var descr: String
     var dueDate: Date
     var participants: [String]
+
     var listId : String
     
     //MARK: Initialization
     init?(name: String, descr: String, dueDate: Date, participants: [String], listId : String) {
+
         // Name must have a value
         guard !name.isEmpty else {
             return nil
@@ -30,8 +31,10 @@ class List {
         self.name = name
         self.descr = descr
         self.dueDate = dueDate
+
         self.participants = participants//??
         self.listId = listId
+
     }
 
 }

@@ -161,8 +161,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     // Configure a view controller before it's presented
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     super.prepare(for: segue, sender: sender)
-     
+        super.prepare(for: segue, sender: sender)
+
      // Confgure the destination view controller only when save button is pressed
      guard let button = sender as? UIBarButtonItem, button === saveButton else {
      os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
@@ -185,6 +185,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
      
       // checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
     
+
+
     // breaking down participants from array into variables
     // considering we are limited to 4 participants
     
@@ -193,7 +195,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
    
         
     //KV :Saving into Firebase
-        
         // objects to add
        let docData: [String: Any] = [
             "User": Auth.auth().currentUser?.uid ?? "UID missing",
