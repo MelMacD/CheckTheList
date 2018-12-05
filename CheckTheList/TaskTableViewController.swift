@@ -32,7 +32,6 @@ class TaskTableViewController: UITableViewController {
     
     var tasks = [Task]()
     
-    
     var checklistID: String  = ""
     
     override func viewDidLoad() {
@@ -40,7 +39,6 @@ class TaskTableViewController: UITableViewController {
         print(checklistID)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // TODO: display saved items from firebase
         loadSampleItems()
         
         
@@ -61,7 +59,7 @@ class TaskTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return tasks.count
     }
-    //TODO: Remove this
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
@@ -71,7 +69,7 @@ class TaskTableViewController: UITableViewController {
         let cellIdentifier = "TaskTableViewCell"
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskTableViewCell else {
-            fatalError("The dequeued cell is not an instance of ListTableViewCell")
+            fatalError("The dequeued cell is not an instance of TaskTableViewCell")
         }
         
         // Fetches the appropriate list
@@ -79,12 +77,19 @@ class TaskTableViewController: UITableViewController {
         
         cell.taskName.text = task.name
         cell.taskDueDate.text = convertDateToString(date: task.dueDate)
-       // if task.participants.count == 0 {
-        //cell.participantFlag.isHidden = true
-        //}
-     //   cell.taskStatus.text = task.status
-        
-        //TODO: Handling for completion
+        if task.participants.count == 0 {
+          cell.participantFlag.isHidden = true
+        }
+        cell.taskStatus.text = task.status
+        if cell.completedFlag.image(for: .normal) == UIImage(named: "checked") {
+            print(cell.taskName.text)
+            cell.isUserInteractionEnabled = false
+            cell.textLabel!.isEnabled = false
+            cell.alpha = 0.3
+        }
+        else {
+            print(cell.taskName.text)
+        }
         
         
         return cell
@@ -186,7 +191,7 @@ class TaskTableViewController: UITableViewController {
     }
     
     // TODO: Propagate this to Firebase when checked, should be marked completed
-    func toggleCompletion(_ cell : ListTableViewCell) {
+    func toggleCompletion(_ cell : TaskTableViewCell) {
         cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
         cell.isUserInteractionEnabled = false
         cell.textLabel!.isEnabled = false
@@ -194,11 +199,11 @@ class TaskTableViewController: UITableViewController {
     }
     
     @IBAction func markCompleted(_ sender: AnyObject?) {
-        let cell = (sender?.superview?.superview as? ListTableViewCell)!
+        let cell = (sender?.superview?.superview as? TaskTableViewCell)!
         if cell.completedFlag.image(for: .normal) == UIImage(named: "checked") {
             return
         }
-        let alert = UIAlertController(title: "Are you sure you want to continue?", message: "Marking the list completed will alert all participants and prevent any future changes.", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Are you sure you want to continue?", message: "Marking the task completed will alert all participants and prevent any future changes.", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in self.toggleCompletion(cell)
         }))
@@ -264,7 +269,14 @@ class TaskTableViewController: UITableViewController {
                     var taskId = data["taskId"] as! String
                     self.date = self.taskDueDate.dateValue()
                     
-                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , isCompleted: true, taskId : taskId) else {
+                    let participants = data["participants"]
+                    
+                    if participants != nil {
+                        self.userP = ["user1", "user2", "user3"]
+                        
+                    }
+                    
+                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: self.userP, status: "Available", isCompleted: true, taskId : taskId) else {
                         fatalError("Unable to instantiate list item1")
                     }
                     self.tasks.append(task1)

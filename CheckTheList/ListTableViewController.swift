@@ -75,8 +75,12 @@ class ListTableViewController: UITableViewController {
         if list.participants.count == 0 {
             cell.participantFlag.isHidden = true
         }
-        //TODO: Handling for completion
-
+        
+        if cell.completedFlag.image(for: .normal) == UIImage(named: "checked") {
+            cell.isUserInteractionEnabled = false
+            cell.textLabel!.isEnabled = false
+            cell.alpha = 0.3
+        }
         return cell
     }
 

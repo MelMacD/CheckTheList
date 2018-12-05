@@ -320,7 +320,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJY-Ef-8xc">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJY-Ef-8xc">
                                             <rect key="frame" x="337" y="47" width="22" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="kn4-3H-dab"/>
@@ -374,10 +374,12 @@
                                         <constraint firstItem="lfo-DS-O1w" firstAttribute="leading" secondItem="OZo-9q-5vh" secondAttribute="leadingMargin" id="oRi-KA-J2S"/>
                                         <constraint firstItem="jau-rk-hjo" firstAttribute="leading" secondItem="kpp-Ec-BDS" secondAttribute="trailing" constant="8" id="uCH-WK-QPf"/>
                                         <constraint firstItem="7b7-dM-O0G" firstAttribute="leading" secondItem="OZo-9q-5vh" secondAttribute="leadingMargin" id="utv-BA-InU"/>
+                                        <constraint firstItem="jau-rk-hjo" firstAttribute="top" secondItem="OZo-9q-5vh" secondAttribute="top" id="vqk-mE-z6i"/>
                                         <constraint firstItem="eJY-Ef-8xc" firstAttribute="top" secondItem="jau-rk-hjo" secondAttribute="bottom" constant="7" id="wUg-Hm-8n5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="completedFlag" destination="jau-rk-hjo" id="40k-un-Pf3"/>
                                     <outlet property="infoButton" destination="eJY-Ef-8xc" id="36t-mD-PPe"/>
                                     <outlet property="participantFlag" destination="kpp-Ec-BDS" id="eac-WS-Ji3"/>
                                     <outlet property="taskDueDate" destination="7b7-dM-O0G" id="bzu-wb-8YV"/>
@@ -490,9 +492,9 @@
                                         </connections>
                                     </button>
                                     <pickerView hidden="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-a0-BxN">
-                                        <rect key="frame" x="0.0" y="422.5" width="355" height="80"/>
+                                        <rect key="frame" x="0.0" y="422.5" width="355" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="Wz2-al-Pew"/>
+                                            <constraint firstAttribute="height" constant="60" id="Wz2-al-Pew"/>
                                         </constraints>
                                     </pickerView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNz-9D-tCN">
@@ -515,9 +517,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView hidden="YES" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Iy-TL-9Zp">
-                                        <rect key="frame" x="17.5" y="475.5" width="320" height="80"/>
+                                        <rect key="frame" x="17.5" y="475.5" width="320" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="SZK-KT-Xbc"/>
+                                            <constraint firstAttribute="height" constant="60" id="SZK-KT-Xbc"/>
                                         </constraints>
                                     </pickerView>
                                 </subviews>
@@ -556,14 +558,12 @@
                         <outlet property="descrTextView" destination="XWL-Du-sL4" id="4yW-E4-xS0"/>
                         <outlet property="dueDatePicker" destination="Dkb-X0-Nr7" id="3Es-kX-aT6"/>
                         <outlet property="nameTextField" destination="rOC-el-n5T" id="WRX-h7-oGN"/>
-                        <outlet property="noneLabel" destination="pV2-uK-XKp" id="blH-r5-OOA"/>
                         <outlet property="optParticipant1" destination="pV2-uK-XKp" id="J5m-Ke-Qb3"/>
-                        <outlet property="participantLabel" destination="CVF-7S-2do" id="lxp-KQ-v90"/>
                         <outlet property="participantPicker" destination="fKg-a0-BxN" id="SFa-dj-eBm"/>
                         <outlet property="saveButton" destination="gVZ-JK-uiy" id="oRI-Km-tYZ"/>
                         <outlet property="selectParticipant" destination="gNz-9D-tCN" id="LgX-JN-HEV"/>
                         <outlet property="statusPicker" destination="2Iy-TL-9Zp" id="tc6-W5-anX"/>
-                        <outlet property="statusTextLabel" destination="n3y-z6-wcD" id="vJB-AO-0bw"/>
+                        <outlet property="statusTextLabel" destination="Tvw-JN-cGK" id="PNf-Up-b3g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDs-dt-UNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -616,11 +616,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkbox" width="980" height="980"/>
+        <image name="checkbox" width="490" height="490"/>
         <image name="person" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="13u-1D-cav"/>
+        <segue reference="v9W-3P-xew"/>
         <segue reference="qXS-3o-onu"/>
     </inferredMetricsTieBreakers>
 </document>

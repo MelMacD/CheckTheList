@@ -15,8 +15,8 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskDueDate: UILabel!
     @IBOutlet weak var taskStatus: UILabel!
     @IBOutlet weak var participantFlag: UIImageView!
-    @IBOutlet weak var completedFlag: UIImageView!
     @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var completedFlag: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

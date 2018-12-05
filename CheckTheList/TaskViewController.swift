@@ -31,14 +31,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet weak var selectParticipant: UIButton!
     @IBOutlet weak var statusPicker: UIPickerView!
     
-
-    @IBOutlet weak var participantLabel: UILabel!
-    @IBOutlet weak var noneLabel: UILabel!
-    
     @IBOutlet weak var statusTextLabel: UILabel!
-    
-    //Sample options for the pickers for testing purposes
-    // TODO: load this as a model populated by values from Firebase
     
     
     let statusOptions = ["Available", "In Progress", "Blocked"]
@@ -59,16 +52,15 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         super.viewDidLoad()
         print(checklistId)
         
+        getUserFromUserList()
+        
         nameTextField.delegate = self
         descrTextView.delegate = self
         participantPicker.delegate = self
         participantPicker.dataSource = self
-        addParticipant.isHidden = true
         statusPicker.isHidden = true
-      //  statusLabel.isHidden = true
-        participantLabel.isHidden = true
-        noneLabel.isHidden = true
-        statusTextLabel.isHidden = true
+        statusPicker.delegate = self
+        statusPicker.dataSource = self
         
         //Create a black border around the description text view
         descrTextView.layer.borderWidth = 1
@@ -80,17 +72,17 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             nameTextField.text = task.name
             descrTextView.text = task.descr
             dueDatePicker.setDate(task.dueDate, animated: true)
-           // statusLabel.text = task.status
-            /*if task.participants.count != 0 {
+            statusTextLabel.text = task.status
+            if task.participants.count != 0 {
                 optParticipant1.text = task.participants.compactMap({$0}).joined(separator: ", ")
-            }*/
+            }
             if optParticipant1.text?.components(separatedBy: ", ").count == 3 {
                 addParticipant.isHidden = true
             }
             // Show status picker instead of label
-          //  statusLabel.isHidden = true
+            statusTextLabel.isHidden = true
             statusPicker.isHidden = false
-           // statusPicker.selectRow(statusOptions.firstIndex(of: task.status)!, inComponent: 0, animated: true)
+            statusPicker.selectRow(statusOptions.firstIndex(of: task.status)!, inComponent: 0, animated: true)
         } else {
             saveButton.isEnabled = false
             isEdit = false
@@ -293,6 +285,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         participantPicker.isHidden = false
         selectParticipant.isHidden = false
         addParticipant.isHidden = true
+        self.participantPicker.reloadAllComponents()
     }
     @IBAction func commitParticipant(_ sender: Any) {
         selectParticipant.isHidden = true
