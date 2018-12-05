@@ -378,6 +378,7 @@
                                         <constraint firstItem="eJY-Ef-8xc" firstAttribute="top" secondItem="jau-rk-hjo" secondAttribute="bottom" constant="7" id="wUg-Hm-8n5"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="completedFlag" destination="jau-rk-hjo" id="40k-un-Pf3"/>
                                     <outlet property="infoButton" destination="eJY-Ef-8xc" id="36t-mD-PPe"/>

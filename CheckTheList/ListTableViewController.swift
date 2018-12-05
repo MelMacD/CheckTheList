@@ -76,11 +76,19 @@ class ListTableViewController: UITableViewController {
             cell.participantFlag.isHidden = true
         }
         
-        if cell.completedFlag.image(for: .normal) == UIImage(named: "checked") {
+        if list.isCompleted {
+            cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
             cell.isUserInteractionEnabled = false
             cell.textLabel!.isEnabled = false
-            cell.alpha = 0.3
+            cell.contentView.alpha = 0.3
         }
+        else {
+            cell.completedFlag.setImage(UIImage(named: "checkbox"), for: .normal)
+            cell.isUserInteractionEnabled = true
+            cell.textLabel!.isEnabled = true
+            cell.contentView.alpha = 1.0
+        }
+        
         return cell
     }
 
@@ -184,9 +192,7 @@ class ListTableViewController: UITableViewController {
         cell.isUserInteractionEnabled = false
         cell.textLabel!.isEnabled = false
         cell.alpha = 0.3
-        
-        
-        
+        lists[self.tableView.indexPath(for: cell)!.row].isCompleted = true
     }
     
     @IBAction func markCompleted(_ sender: AnyObject?) {

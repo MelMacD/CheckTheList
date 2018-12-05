@@ -81,16 +81,18 @@ class TaskTableViewController: UITableViewController {
           cell.participantFlag.isHidden = true
         }
         cell.taskStatus.text = task.status
-        if cell.completedFlag.image(for: .normal) == UIImage(named: "checked") {
-            print(cell.taskName.text)
+        if task.isCompleted {
+            cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
             cell.isUserInteractionEnabled = false
             cell.textLabel!.isEnabled = false
-            cell.alpha = 0.3
+            cell.contentView.alpha = 0.3
         }
         else {
-            print(cell.taskName.text)
+            cell.completedFlag.setImage(UIImage(named: "checkbox"), for: .normal)
+            cell.isUserInteractionEnabled = true
+            cell.textLabel!.isEnabled = true
+            cell.contentView.alpha = 1.0
         }
-        
         
         return cell
     }
@@ -196,6 +198,8 @@ class TaskTableViewController: UITableViewController {
         cell.isUserInteractionEnabled = false
         cell.textLabel!.isEnabled = false
         cell.alpha = 0.3
+        // mark isCompleted for the specific task to true
+        tasks[self.tableView.indexPath(for: cell)!.row].isCompleted = true
     }
     
     @IBAction func markCompleted(_ sender: AnyObject?) {
@@ -276,7 +280,7 @@ class TaskTableViewController: UITableViewController {
                         
                     }
                     
-                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: self.userP, status: "Available", isCompleted: true, taskId : taskId) else {
+                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: self.userP, status: "Available", isCompleted: false, taskId : taskId) else {
                         fatalError("Unable to instantiate list item1")
                     }
                     self.tasks.append(task1)
