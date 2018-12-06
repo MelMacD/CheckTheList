@@ -144,7 +144,7 @@ class TaskTableViewController: UITableViewController {
             // Create a new variable to store the instance of PlayerTableViewController
             let destinationVC = segue.destination as! TaskViewController
             destinationVC.checklistId = self.checklistID
-         
+            destinationVC.checklist = self.checklist
             
             
         case "EditTask":
@@ -162,6 +162,7 @@ class TaskTableViewController: UITableViewController {
             
             let selectedItem = tasks[indexPath.row]
             tasksViewController.task = selectedItem
+            tasksViewController.checklist = checklist
         default:
             fatalError("Unexpected Segue Identifer; \(String(describing: segue.identifier))")
         }
@@ -273,14 +274,17 @@ class TaskTableViewController: UITableViewController {
                     var taskId = data["taskId"] as! String
                     self.date = self.taskDueDate.dateValue()
                     
-                    let participants = data["participants"]
+                    var participants = data["participants"]
                     
                     if participants != nil {
                         self.userP = ["user1", "user2", "user3"]
                         
                     }
+                    else {
+                        participants = []
+                    }
                     
-                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: self.userP, status: "Available", isCompleted: false, taskId : taskId) else {
+                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: participants as! [String], status: "Available", isCompleted: false, taskId : taskId) else {
                         fatalError("Unable to instantiate list item1")
                     }
                     self.tasks.append(task1)

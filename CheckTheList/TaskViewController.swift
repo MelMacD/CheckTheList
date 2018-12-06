@@ -45,6 +45,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     // Controls whether passing in a new or preexisting task
     var task: Task?
+    var checklist: List?
     
     var isEdit: Bool?
     
@@ -260,23 +261,14 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     func getUserFromUserList(){
         
-        db.collection("Userlist")
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                        
-                        let email = data["email"] as? String ?? "none"
-                        self.participantOptions.append(email)
-                        print(self.participantOptions)
-                    }
-                    
-                }
-                
+        for participant in checklist!.participants {
+            if !(self.optParticipant1.text?.components(separatedBy: "\n").contains(participant))! {
+                self.participantOptions.append(participant)
+            }
         }
-        print(self.participantOptions)
+        if participantOptions.count == 0 {
+            addParticipant.isHidden = true
+        }
         self.participantPicker.reloadAllComponents()
     }
     
@@ -304,6 +296,9 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             addParticipant.isHidden = true
         }
         self.participantOptions = participantOptions.filter {$0 != participantOptions[participantPicker.selectedRow(inComponent: 0)]}
+        if participantOptions.count == 0 {
+            addParticipant.isHidden = true
+        }
     }
     
 }

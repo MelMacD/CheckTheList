@@ -159,6 +159,7 @@ class ListTableViewController: UITableViewController {
             
             let selectedItem = lists[indexPath.row].listId
             tasksViewController.checklistID = selectedItem
+            tasksViewController.checklist = lists[indexPath.row]
         default:
             fatalError("Unexpected Segue Identifer; \(String(describing: segue.identifier))")
         }
@@ -291,16 +292,17 @@ class ListTableViewController: UITableViewController {
                             self.checklistDesc = data["description"] as! String
                             self.checklistDueDate = data["dueDate"] as! Timestamp
                             
-                            let participants = data["participants"]
-                            
+                            var participants = data["participants"]
                             if participants != nil {
                                 self.userP = ["user1", "user2", "user3"]
                                 
                             }
-                            
+                            else {
+                                participants = []
+                            }
                             self.date = self.checklistDueDate.dateValue()
                             
-                            guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: self.userP, isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
+                            guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: participants as! [String], isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
                                 fatalError("Unable to instantiate list item2")
                             }
                             
