@@ -17,13 +17,16 @@ import FirebaseAuth
 
 class ListTableViewController: UITableViewController {
 
+    
     //MARK: Properties
+    let sb = UIStoryboard(name: "Main", bundle: nil)
    let db = Firestore.firestore()
     var lists = [List]()
     var checklistName:String = ""
     var checklistDesc:String = ""
     var checklistDueDate:Timestamp = Timestamp.init()
    var checklist : [String] = []
+    var test : [String] = []
     var date : Date = Date()
     var userP : [String] = []
     
@@ -31,7 +34,8 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      // lists.removeAll()
+        
+      
         
       //  let db2 = Firestore.firestore().collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
         // Hook up edit button to use default API
@@ -152,10 +156,25 @@ class ListTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func signOut(_ sender: UIBarButtonItem) {
+        try! Auth.auth().signOut()
+        GIDSignIn.sharedInstance().signOut()
+        if let tableViewVC = sb.instantiateViewController(withIdentifier: "loginVC") as? ViewController{
+            self.present(tableViewVC, animated: true, completion: nil)
+        }
+        
+    
+    }
+    
     //MARK: Actions
    @IBAction func unwindToItemList(sender: UIStoryboardSegue) {
     if let sourceViewController = sender.source as? ListViewController{
+        //
+         lists.removeAll()
+        print(lists)
         loadSampleItems()
+        
+        
         
     }/*, let
             list = sourceViewController.checklist {
@@ -243,38 +262,55 @@ class ListTableViewController: UITableViewController {
     
     //MARK: Private Methods
     
+    
     private func loadSampleItems() {
         
+        func run(completion: @escaping () -> Void){
+            let deadline = DispatchTime.now() + .seconds(2)
+            DispatchQueue.main.asyncAfter(deadline: deadline){
+                completion()
+            }
+        }
         
-       
-        //var check : [String] = []
-        db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
-            .addSnapshotListener { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
-                    return
-                }
-               
-                let values = documents.map{$0["checklistID"]!}
-               
-                for value in values {
-                    let x = value as! String
-                    
-                    if !self.checklist.contains(x) {self.checklist.append(x)
-                    }
-                }
-               print(self.checklist)
-                for check in self.checklist{
+        db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist").getDocuments(){
+            QuerySnapshot , error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            let values = QuerySnapshot?.documents.map{$0["checklistID"]}
+            for value in values! {
+                let x = value as! String
                 
-                    self.db.collection("Cheklists").document(check)
+                if !self.checklist.contains(x) {
+                    self.checklist.append(x)
+                }
+            }
+           
+            
+                
+                self.test.append(contentsOf: self.checklist)
+                print(self.test)
+            
+            
+            }
+        run(){
+           // print(1111111111)
+           // print(self.checklist)
+            print(self.checklist.count)
+                    self.lists.removeAll()
+                    for check in self.checklist{
+                        print(check)
+                        
+                
+                        self.db.collection("Cheklists").document(check)
                         .addSnapshotListener { documentSnapshot, error in
                             guard let document = documentSnapshot else {
-                                print("Error fetching document: \(error!)")
-                                return
+                            print("Error fetching document: \(error!)")
+                            return
                             }
                             guard let data = document.data() else {
-                                print("Document data was empty.")
-                                return
+                            print("Document data was empty.")
+                            return
                             }
                             
                             self.checklistName = data["checklistName"] as! String
@@ -284,32 +320,45 @@ class ListTableViewController: UITableViewController {
                             let participants = data["participants"]
                             
                             if participants != nil {
-                                self.userP = ["user1", "user2", "user3"]
-                                
+                            self.userP = ["user1", "user2", "user3"]
+                            
                             }
                             
                             self.date = self.checklistDueDate.dateValue()
-                            
+                            // print(checklistName,checklistDesc, date, userP
                             guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: self.userP, isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
-                                fatalError("Unable to instantiate list item2")
+                                    fatalError("Unable to instantiate list item2")
+                                }
+                           
+                              //  self.lists.append()
+                            var isPresent = false
+                            for key in self.lists{
+                                    
+                                    if key.name == self.checklistName{
+                                        isPresent = true
+                                    }
                             }
+                            if !isPresent {
+                                self.lists.append(list2)
+                            }
+                                
                             
                             
-                            // print(checklistName,checklistDesc, date, userP)
                             
                             
-                            self.lists.append(list2)
-                          
                             
-                          
-                            self.tableView.reloadData()
-                            
-                            
+                        }
+            
                     }
-                    
-                }
+            run(){
+                self.tableView.reloadData()
+            }
+            
+            
+            
         }
-   }
+
+}
     // Converts a Date object into a readable String
     func convertDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -339,7 +388,7 @@ class ListTableViewController: UITableViewController {
                 }
         }
      
-        db.collection("Cheklists").document(checklistId).delete() { err in
+      /*  db.collection("Cheklists").document(checklistId).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
@@ -349,7 +398,7 @@ class ListTableViewController: UITableViewController {
                 self.tableView.reloadData()
                 
             }
-        }
+        }*/
      
 
  
@@ -357,3 +406,5 @@ class ListTableViewController: UITableViewController {
     }
 
 }
+
+
