@@ -46,6 +46,32 @@ class ListTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                
+                let values = documents.map{$0["checklistID"]}
+                for value in values {
+                    let x = value as! String
+                    
+                    if !self.checklist.contains(x) {
+                        self.checklist.append(x)
+                    }
+                }
+                
+                self.test.append(contentsOf: self.checklist)
+                print(self.test)
+                
+                
+                
+                
+                
+        }
+    }
    
     
     
@@ -277,100 +303,96 @@ class ListTableViewController: UITableViewController {
     private func loadSampleItems() {
         
         func run(completion: @escaping () -> Void){
-            let deadline = DispatchTime.now() + .seconds(2)
+            let deadline = DispatchTime.now()  + .seconds(1)
             DispatchQueue.main.asyncAfter(deadline: deadline){
                 completion()
             }
         }
-        
-        db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist").getDocuments(){
-            QuerySnapshot , error in
-            if let error = error {
-                print(error.localizedDescription)
+        func loadCheck(){
+            run(){
+                self.tableView.reloadData()
+            
+            for check in self.checklist{
+                print(check)
+                self.db.collection("Cheklists").document(check)
+                    .addSnapshotListener { documentSnapshot, error in
+                        guard let document = documentSnapshot else {
+                            print("Error fetching document: \(error!)")
+                            return
+                        }
+                        guard let data = document.data() else {
+                            print("Document data was empty.")
+                            return
+                        }
+                        
+                        self.checklistName = data["checklistName"] as! String
+                        self.checklistDesc = data["description"] as! String
+                        self.checklistDueDate = data["dueDate"] as! Timestamp
+                        
+                        var participants = data["participants"]
+                        if participants != nil {
+                            self.userP = ["user1", "user2", "user3"]
+                            
+                        }
+                        else {
+                            participants = []
+                        }
+                        self.date = self.checklistDueDate.dateValue()
+                        
+                        // print(checklistName,checklistDesc, date, userP
+                        guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: participants as! [String], isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
+                            fatalError("Unable to instantiate list item2")
+                        }
+                        
+                        //  self.lists.append()
+                        var isPresent = false
+                        for key in self.lists{
+                            
+                            if key.name == self.checklistName{
+                                isPresent = true
+                            }
+                            
+                        }
+                        if !isPresent {
+                            self.lists.append(list2)
+                            self.tableView.reloadData()
+                        }
+                        
+                        
+                }
+                
             }
-            let values = QuerySnapshot?.documents.map{$0["checklistID"]}
-            for value in values! {
+            }
+            
+        }
+        
+        
+        db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+            let values = documents.map{$0["checklistID"]}
+            for value in values {
                 let x = value as! String
                 
                 if !self.checklist.contains(x) {
                     self.checklist.append(x)
                 }
             }
-           
-            
-                
-                self.test.append(contentsOf: self.checklist)
-                print(self.test)
-            
-            
+                 //  self.test.append(contentsOf: self.checklist)
+                //print(self.test)
+                print(self.checklist)
+                loadCheck()
             }
         run(){
            // print(1111111111)
            // print(self.checklist)
-            print(self.checklist.count)
+            
                     self.lists.removeAll()
-                    for check in self.checklist{
-                        print(check)
-                        
-                
-                        self.db.collection("Cheklists").document(check)
-                        .addSnapshotListener { documentSnapshot, error in
-                            guard let document = documentSnapshot else {
-                            print("Error fetching document: \(error!)")
-                            return
-                            }
-                            guard let data = document.data() else {
-                            print("Document data was empty.")
-                            return
-                            }
-                            
-                            self.checklistName = data["checklistName"] as! String
-                            self.checklistDesc = data["description"] as! String
-                            self.checklistDueDate = data["dueDate"] as! Timestamp
-                            
-                            var participants = data["participants"]
-                            if participants != nil {
-                            self.userP = ["user1", "user2", "user3"]
-                            
-                            }
-                            else {
-                                participants = []
-                            }
-                            self.date = self.checklistDueDate.dateValue()
-
-                            // print(checklistName,checklistDesc, date, userP
-                            guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: participants as! [String], isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
-                                fatalError("Unable to instantiate list item2")
-                                }
-                           
-                              //  self.lists.append()
-                            var isPresent = false
-                            for key in self.lists{
-                                    
-                                    if key.name == self.checklistName{
-                                        isPresent = true
-                                    }
-
-                            }
-                            if !isPresent {
-                                self.lists.append(list2)
-                            }
-                                
-                            
-                            
-                            
-                            
-                            
-                        }
-            
-                    }
-            run(){
-                self.tableView.reloadData()
+         
             }
-            
-            
-            
-        }
 
 }
     // Converts a Date object into a readable String
@@ -396,27 +418,16 @@ class ListTableViewController: UITableViewController {
                                 print("Error removing document: \(err)")
                             } else {
                                 print("Document successfully removed!")
+                               // self.lists.removeAll()
+                                //self.loadSampleItems()
+                                let index = self.checklist.index(of: checklistId)
+                                self.checklist.remove(at: index!)
+                                self.tableView.reloadData()
                             }
                         }
                     }
                 }
         }
-     
-      /*  db.collection("Cheklists").document(checklistId).delete() { err in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                print("Document successfully removed!")
-               self.lists.removeAll()
-                self.loadSampleItems()
-                self.tableView.reloadData()
-                
-            }
-        }*/
-     
-
- 
-        
     }
 
 }
