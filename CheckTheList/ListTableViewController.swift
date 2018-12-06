@@ -79,8 +79,20 @@ class ListTableViewController: UITableViewController {
         if list.participants.count == 0 {
             cell.participantFlag.isHidden = true
         }
-        //TODO: Handling for completion
-
+        
+        if list.isCompleted {
+            cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
+            cell.isUserInteractionEnabled = false
+            cell.textLabel!.isEnabled = false
+            cell.contentView.alpha = 0.3
+        }
+        else {
+            cell.completedFlag.setImage(UIImage(named: "checkbox"), for: .normal)
+            cell.isUserInteractionEnabled = true
+            cell.textLabel!.isEnabled = true
+            cell.contentView.alpha = 1.0
+        }
+        
         return cell
     }
 
@@ -151,6 +163,7 @@ class ListTableViewController: UITableViewController {
             
             let selectedItem = lists[indexPath.row].listId
             tasksViewController.checklistID = selectedItem
+            tasksViewController.checklist = lists[indexPath.row]
         default:
             fatalError("Unexpected Segue Identifer; \(String(describing: segue.identifier))")
         }
@@ -199,9 +212,7 @@ class ListTableViewController: UITableViewController {
         cell.isUserInteractionEnabled = false
         cell.textLabel!.isEnabled = false
         cell.alpha = 0.3
-        
-        
-        
+        lists[self.tableView.indexPath(for: cell)!.row].isCompleted = true
     }
     
     @IBAction func markCompleted(_ sender: AnyObject?) {
@@ -317,17 +328,19 @@ class ListTableViewController: UITableViewController {
                             self.checklistDesc = data["description"] as! String
                             self.checklistDueDate = data["dueDate"] as! Timestamp
                             
-                            let participants = data["participants"]
-                            
+                            var participants = data["participants"]
                             if participants != nil {
                             self.userP = ["user1", "user2", "user3"]
                             
                             }
-                            
+                            else {
+                                participants = []
+                            }
                             self.date = self.checklistDueDate.dateValue()
+
                             // print(checklistName,checklistDesc, date, userP
-                            guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: self.userP, isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
-                                    fatalError("Unable to instantiate list item2")
+                            guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: participants as! [String], isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
+                                fatalError("Unable to instantiate list item2")
                                 }
                            
                               //  self.lists.append()
@@ -337,6 +350,7 @@ class ListTableViewController: UITableViewController {
                                     if key.name == self.checklistName{
                                         isPresent = true
                                     }
+
                             }
                             if !isPresent {
                                 self.lists.append(list2)

@@ -253,13 +253,14 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                         let data = document.data()
                         
                         let email = data["email"] as? String ?? "none"
-                        self.participantOptions.append(email)
+                        if !(self.optParticipant1.text?.components(separatedBy: "\n").contains(email))! {
+                            self.participantOptions.append(email)
+                        }
                     }
                     
                 }
                 
         }
-        
         self.participantPicker.reloadAllComponents()
     }
     
@@ -290,6 +291,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             addParticipant.isHidden = true
         }
         self.participantOptions = participantOptions.filter {$0 != participantOptions[participantPicker.selectedRow(inComponent: 0)]}
+        if participantOptions.count == 0 {
+            addParticipant.isHidden = true
+        }
     }
     
   

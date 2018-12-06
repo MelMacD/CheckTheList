@@ -32,7 +32,6 @@ class TaskTableViewController: UITableViewController {
     
     var tasks = [Task]()
     
-    
     var checklistID: String  = ""
     
     override func viewDidLoad() {
@@ -40,7 +39,6 @@ class TaskTableViewController: UITableViewController {
         print(checklistID)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // TODO: display saved items from firebase
         loadSampleItems()
         
         
@@ -61,7 +59,7 @@ class TaskTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return tasks.count
     }
-    //TODO: Remove this
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
@@ -71,7 +69,7 @@ class TaskTableViewController: UITableViewController {
         let cellIdentifier = "TaskTableViewCell"
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskTableViewCell else {
-            fatalError("The dequeued cell is not an instance of ListTableViewCell")
+            fatalError("The dequeued cell is not an instance of TaskTableViewCell")
         }
         
         // Fetches the appropriate list
@@ -79,13 +77,22 @@ class TaskTableViewController: UITableViewController {
         
         cell.taskName.text = task.name
         cell.taskDueDate.text = convertDateToString(date: task.dueDate)
-       // if task.participants.count == 0 {
-        //cell.participantFlag.isHidden = true
-        //}
-     //   cell.taskStatus.text = task.status
-        
-        //TODO: Handling for completion
-        
+        if task.participants.count == 0 {
+          cell.participantFlag.isHidden = true
+        }
+        cell.taskStatus.text = task.status
+        if task.isCompleted {
+            cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
+            cell.isUserInteractionEnabled = false
+            cell.textLabel!.isEnabled = false
+            cell.contentView.alpha = 0.3
+        }
+        else {
+            cell.completedFlag.setImage(UIImage(named: "checkbox"), for: .normal)
+            cell.isUserInteractionEnabled = true
+            cell.textLabel!.isEnabled = true
+            cell.contentView.alpha = 1.0
+        }
         
         return cell
     }
@@ -137,7 +144,7 @@ class TaskTableViewController: UITableViewController {
             // Create a new variable to store the instance of PlayerTableViewController
             let destinationVC = segue.destination as! TaskViewController
             destinationVC.checklistId = self.checklistID
-         
+            destinationVC.checklist = self.checklist
             
             
         case "EditTask":
@@ -155,6 +162,7 @@ class TaskTableViewController: UITableViewController {
             
             let selectedItem = tasks[indexPath.row]
             tasksViewController.task = selectedItem
+            tasksViewController.checklist = checklist
         default:
             fatalError("Unexpected Segue Identifer; \(String(describing: segue.identifier))")
         }
@@ -186,19 +194,21 @@ class TaskTableViewController: UITableViewController {
     }
     
     // TODO: Propagate this to Firebase when checked, should be marked completed
-    func toggleCompletion(_ cell : ListTableViewCell) {
+    func toggleCompletion(_ cell : TaskTableViewCell) {
         cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
         cell.isUserInteractionEnabled = false
         cell.textLabel!.isEnabled = false
         cell.alpha = 0.3
+        // mark isCompleted for the specific task to true
+        tasks[self.tableView.indexPath(for: cell)!.row].isCompleted = true
     }
     
     @IBAction func markCompleted(_ sender: AnyObject?) {
-        let cell = (sender?.superview?.superview as? ListTableViewCell)!
+        let cell = (sender?.superview?.superview as? TaskTableViewCell)!
         if cell.completedFlag.image(for: .normal) == UIImage(named: "checked") {
             return
         }
-        let alert = UIAlertController(title: "Are you sure you want to continue?", message: "Marking the list completed will alert all participants and prevent any future changes.", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Are you sure you want to continue?", message: "Marking the task completed will alert all participants and prevent any future changes.", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in self.toggleCompletion(cell)
         }))
@@ -264,7 +274,17 @@ class TaskTableViewController: UITableViewController {
                     var taskId = data["taskId"] as! String
                     self.date = self.taskDueDate.dateValue()
                     
-                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , isCompleted: true, taskId : taskId) else {
+                    var participants = data["participants"]
+                    
+                    if participants != nil {
+                        self.userP = ["user1", "user2", "user3"]
+                        
+                    }
+                    else {
+                        participants = []
+                    }
+                    
+                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: participants as! [String], status: "Available", isCompleted: false, taskId : taskId) else {
                         fatalError("Unable to instantiate list item1")
                     }
                     self.tasks.append(task1)
