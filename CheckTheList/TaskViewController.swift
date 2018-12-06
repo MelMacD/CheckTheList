@@ -186,7 +186,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
-        var status: String
+        var statusS: String
+        statusS = "Available"
         let name = nameTextField.text ?? ""
         let descr = descrTextView.text ?? ""
         let dueDate = dueDatePicker.date
@@ -195,7 +196,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             participants = []
         }
         if isEdit! {
-            status = statusOptions[statusPicker.selectedRow(inComponent: 0)]
+            statusS = statusOptions[statusPicker.selectedRow(inComponent: 0)]
         }
         else {
            // status = statusLabel.text ?? ""
@@ -204,58 +205,94 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         if isPresentingInAddItemMode {//??
         }
+       print(statusS)
+        var userP = participants!
         
         // Set the list to be passed to ListTableViewController after the unwind seque
-        
+        var setOrUpdate = false;
         //task = Task(name: name, descr: descr, dueDate: dueDate, participants: participants!, status: status, isCompleted: false)
+       
         
+        print("update :" ,statusS)
         let docData: [String: Any] = [
             //"User": Auth.auth().currentUser?.uid ?? "UID missing",
             
             "taskName": name,
-           // "status": false,
+            "status": statusS,
             "description": descr,
             "dueDate": dueDate,
             "dateCreated" : NSDate(),
-           // "participants" : participants!,
+            "participants" : userP,
             "taskId" : uuid,
-            "status": true,
+           // "status": true,
             
             ]
         let docData1: [String: Any] = [
             "taskID" : uuid,
             
             ]
-        
-        // add the checklist into checklist collection
-        db.collection("Cheklists").document(checklistId).collection("shareTask").document().setData(docData) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("New Checklist Document successfully written!")
-                
-            }
-        }
+       
+        var addOrUpdate = false
         
         
-       /* if (participants!.count > 0) {
-            for participant in participants!{
-                
-                db.collection("Checklist").document(checklistId).collection("sharedTaks").document().setData(docData1) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("New Checklist Document successfully written!")
+        db.collection("Cheklists").document(self.checklistId).collection("shareTask").whereField("taskName", isEqualTo: name)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
                         
                     }
+                    print(querySnapshot!.count)
+                    print("SIZE")
+                    if querySnapshot!.count > 0{
+                        addOrUpdate = true;
+                    }
                 }
-                
+        }
+    
+        if addOrUpdate == true {
+            db.collection("Cheklists").document(self.checklistId).collection("shareTask").whereField("taskName", isEqualTo: name)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            var x = document.data()["taskId"]
+                            
+                            let washingtonRef = self.db.collection("Cheklists").document(self.checklistId).collection("shareTask").document(x as! String)
+                            
+                            // Set the "capital" field of the city 'DC'
+                                washingtonRef.updateData(docData) { err in
+                                if let err = err {
+                                    print("Error updating document: \(err)")
+                                } else {
+                                    print("Document successfully updated")
+                                }
+                            }
+                        }
+                    }
             }
-        }*/
+        
+            
+        }else{
+            db.collection("Cheklists").document(self.checklistId).collection("shareTask").document(uuid).setData(docData) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("New Checklist Document successfully written!")
+                }
+            }
+            
+        }
+        
+       
+        
     
     
-    }
     
+    
+}
     
     //MARK: Custom Functions
     

@@ -29,6 +29,7 @@ class TaskTableViewController: UITableViewController {
     var taskDueDate:Timestamp = Timestamp.init()
     var date : Date = Date()
     var userP : [String] = []
+    var status: String = ""
     
     var tasks = [Task]()
     
@@ -138,9 +139,6 @@ class TaskTableViewController: UITableViewController {
         switch(segue.identifier ?? "") {
         case "AddTask":
             
-            
-           
-            
             // Create a new variable to store the instance of PlayerTableViewController
             let destinationVC = segue.destination as! TaskViewController
             destinationVC.checklistId = self.checklistID
@@ -163,6 +161,10 @@ class TaskTableViewController: UITableViewController {
             let selectedItem = tasks[indexPath.row]
             tasksViewController.task = selectedItem
             tasksViewController.checklist = checklist
+            
+            let destinationVC = segue.destination as! TaskViewController
+            destinationVC.checklistId = self.checklistID
+            destinationVC.checklist = self.checklist
         default:
             fatalError("Unexpected Segue Identifer; \(String(describing: segue.identifier))")
         }
@@ -172,8 +174,9 @@ class TaskTableViewController: UITableViewController {
     //MARK: Actions
     @IBAction func unwindToItemList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? TaskViewController, let
-            task = sourceViewController.task {
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            task = sourceViewController.task {}
+        
+           /* if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing item
                 self.tasks.removeAll()
                 loadSampleItems()
@@ -190,7 +193,7 @@ class TaskTableViewController: UITableViewController {
             }
             // Save the items
             //saveItems()
-        }
+        }*/
     }
     
     // TODO: Propagate this to Firebase when checked, should be marked completed
@@ -262,7 +265,8 @@ class TaskTableViewController: UITableViewController {
     
     private func loadSampleItems() {
         
-        db.collection("Cheklists").document(checklistID).collection("shareTask").getDocuments() { (querySnapshot, err) in
+        db.collection("Cheklists").document(checklistID).collection("shareTask")
+            .addSnapshotListener { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -273,6 +277,9 @@ class TaskTableViewController: UITableViewController {
                     self.taskDesc = data["description"] as! String
                     var taskId = data["taskId"] as! String
                     self.date = self.taskDueDate.dateValue()
+                    self.status = data["status"] as! String
+                    print(self.status)
+                    
                     
                     var participants = data["participants"]
                     
@@ -284,11 +291,24 @@ class TaskTableViewController: UITableViewController {
                         participants = []
                     }
                     
-                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: participants as! [String], status: "Available", isCompleted: false, taskId : taskId) else {
+                    guard let task1 = Task(name: self.taskName, descr:  self.taskDesc, dueDate: self.date , participants: participants as! [String], status: self.status, isCompleted: false, taskId : taskId) else {
                         fatalError("Unable to instantiate list item1")
                     }
-                    self.tasks.append(task1)
-                     self.tableView.reloadData()
+                    
+                    var isPresent = false
+                    for key in self.tasks{
+                        
+                        if key.name == self.taskName{
+                            isPresent = true
+                        }
+                        
+                    }
+                    if !isPresent {
+                        self.tasks.append(task1)
+                        self.tableView.reloadData()
+                    }
+                    
+                   
                 }
             }
         }
@@ -312,7 +332,9 @@ class TaskTableViewController: UITableViewController {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        self.db.collection("Checklist").document(checklistId).collection("shareTask") .document(document.documentID).delete(){ err in
+                        
+                        
+                        self.db.collection("Checklist").document(checklistId).collection("shareTask") .document(document.data()["taskId"] as! String).delete(){ err in
                             if let err = err {
                                 print("Error removing document: \(err)")
                             } else {

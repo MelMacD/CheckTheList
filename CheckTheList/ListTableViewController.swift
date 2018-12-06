@@ -30,13 +30,15 @@ class ListTableViewController: UITableViewController {
     var date : Date = Date()
     var userP : [String] = []
     
+    
+    
      
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
       
-        
+       
       //  let db2 = Firestore.firestore().collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
         // Hook up edit button to use default API
         navigationItem.rightBarButtonItem = editButtonItem
@@ -71,6 +73,7 @@ class ListTableViewController: UITableViewController {
                 
                 
         }
+        self.sortCompletion()
     }
    
     
@@ -234,6 +237,7 @@ class ListTableViewController: UITableViewController {
     
     // TODO: Propagate this to Firebase when checked, should be marked completed
     func toggleCompletion(_ cell : ListTableViewCell) {
+        
         cell.completedFlag.setImage(UIImage(named: "checked"), for: .normal)
         cell.isUserInteractionEnabled = false
         cell.textLabel!.isEnabled = false
@@ -253,6 +257,12 @@ class ListTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
+        
+         let list = lists[self.tableView.indexPath(for: cell)!.row]
+        
+        markAsComplete(checklistId: list.listId)
+        
+        
         
     }
     
@@ -303,9 +313,23 @@ class ListTableViewController: UITableViewController {
     private func loadSampleItems() {
         
         func run(completion: @escaping () -> Void){
+           let activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView();
+            activityIndicator.center = self.view.center;
+            activityIndicator.hidesWhenStopped = true;
+            activityIndicator.style = UIActivityIndicatorView.Style.gray;
+            view.addSubview(activityIndicator);
+            
+            activityIndicator.startAnimating();
+            UIApplication.shared.beginIgnoringInteractionEvents();
+            
+            
             let deadline = DispatchTime.now()  + .seconds(1)
             DispatchQueue.main.asyncAfter(deadline: deadline){
                 completion()
+                activityIndicator.stopAnimating();
+                UIApplication.shared.endIgnoringInteractionEvents();
+
+                
             }
         }
         func loadCheck(){
@@ -355,16 +379,14 @@ class ListTableViewController: UITableViewController {
                         }
                         if !isPresent {
                             self.lists.append(list2)
+                             self.sortCompletion()
                             self.tableView.reloadData()
                         }
-                        
-                        
                 }
-                
             }
-            }
-            
         }
+            
+    }
         
         
         db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
@@ -384,6 +406,7 @@ class ListTableViewController: UITableViewController {
                  //  self.test.append(contentsOf: self.checklist)
                 //print(self.test)
                 print(self.checklist)
+                 self.sortCompletion()
                 loadCheck()
             }
         run(){
@@ -404,8 +427,26 @@ class ListTableViewController: UITableViewController {
         dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: date)
     }
+    
+    func markAsComplete(checklistId: String){
+        let washingtonRef = db.collection("Cheklists").document(checklistId)
+        
+        // Set the "capital" field of the city 'DC'
+        washingtonRef.updateData([
+            "status": true
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+                self.sortCompletion()
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
 
-    func deleteChecklist(checklistId:String){
+    func deleteChecklist(checklistId: String){
         
         db.collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist").whereField("checklistID", isEqualTo: checklistId)
             .getDocuments() { (querySnapshot, err) in
