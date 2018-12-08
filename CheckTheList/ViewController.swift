@@ -86,8 +86,7 @@ extension ViewController{
             print(error!.localizedDescription)
             return
         }
-        // var userEmail = authDataResult?.user.email
-      //  performSegue(withIdentifier: "tableView", sender: self)
+        
         
         
         if let tableViewVC = self.sb.instantiateViewController(withIdentifier: "tableViewVC") as? UINavigationController{
@@ -98,7 +97,7 @@ extension ViewController{
     func checkLoggedIn() {
         Auth.auth().addStateDidChangeListener { auth, user in
         if user != nil {
-            //print(user?.displayName)
+          
         // User is signed in.
         let isNewuser = self.checkUsersList(idToken: user!.uid)
             print(isNewuser)

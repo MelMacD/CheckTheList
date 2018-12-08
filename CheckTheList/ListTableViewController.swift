@@ -39,7 +39,6 @@ class ListTableViewController: UITableViewController {
         
       
        
-      //  let db2 = Firestore.firestore().collection("Users").document(Auth.auth().currentUser!.email!).collection("sharedChecklist")
         // Hook up edit button to use default API
         navigationItem.rightBarButtonItem = editButtonItem
        loadSampleItems()
@@ -218,21 +217,7 @@ class ListTableViewController: UITableViewController {
         
         
         
-    }/*, let
-            list = sourceViewController.checklist {
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing item
-                lists[selectedIndexPath.row] = list
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
-            }
-            else {
-                // Add a new item
-                let newIndexPath = IndexPath(row: lists.count, section: 0)
-                lists.append(list)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-            }
-            // Save the items
-            //saveItems()*/
+    }
         }
     
     // TODO: Propagate this to Firebase when checked, should be marked completed
@@ -363,12 +348,11 @@ class ListTableViewController: UITableViewController {
                         }
                         self.date = self.checklistDueDate.dateValue()
                         
-                        // print(checklistName,checklistDesc, date, userP
                         guard let list2 = List(name: self.checklistName, descr: self.checklistDesc, dueDate: self.date ,participants: participants as! [String], isCompleted: data["status"] as! Bool, listId : data["checklistId"] as! String) else {
                             fatalError("Unable to instantiate list item2")
                         }
                         
-                        //  self.lists.append()
+                       
                         var isPresent = false
                         for key in self.lists{
                             
@@ -403,15 +387,13 @@ class ListTableViewController: UITableViewController {
                     self.checklist.append(x)
                 }
             }
-                 //  self.test.append(contentsOf: self.checklist)
-                //print(self.test)
+                
                 print(self.checklist)
                  self.sortCompletion()
                 loadCheck()
             }
         run(){
-           // print(1111111111)
-           // print(self.checklist)
+          
             
                     self.lists.removeAll()
          
@@ -431,7 +413,7 @@ class ListTableViewController: UITableViewController {
     func markAsComplete(checklistId: String){
         let washingtonRef = db.collection("Cheklists").document(checklistId)
         
-        // Set the "capital" field of the city 'DC'
+        
         washingtonRef.updateData([
             "status": true
         ]) { err in
@@ -459,8 +441,7 @@ class ListTableViewController: UITableViewController {
                                 print("Error removing document: \(err)")
                             } else {
                                 print("Document successfully removed!")
-                               // self.lists.removeAll()
-                                //self.loadSampleItems()
+                               
                                 let index = self.checklist.index(of: checklistId)
                                 self.checklist.remove(at: index!)
                                 self.tableView.reloadData()

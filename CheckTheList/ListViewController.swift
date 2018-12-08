@@ -178,17 +178,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     }
     let isPresentingInAddItemMode = presentingViewController is UINavigationController
      
-     if isPresentingInAddItemMode {//??
+     if isPresentingInAddItemMode {
      }
-     
-     // Set the list to be passed to ListTableViewController after the unwind seque
-     
-      // checklist = List(name: name, descr: descr, dueDate: dueDate, participants: participants!)
-    
-
-
-    // breaking down participants from array into variables
-    // considering we are limited to 4 participants
+ 
     
     participants?.append(Auth.auth().currentUser!.email!)
     

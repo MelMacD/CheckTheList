@@ -176,24 +176,6 @@ class TaskTableViewController: UITableViewController {
         if let sourceViewController = sender.source as? TaskViewController, let
             task = sourceViewController.task {}
         
-           /* if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing item
-                self.tasks.removeAll()
-                loadSampleItems()
-                tasks[selectedIndexPath.row] = task
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
-            }
-            else {
-                // Add a new item
-                self.tasks.removeAll()
-                loadSampleItems()
-                let newIndexPath = IndexPath(row: tasks.count, section: 0)
-                tasks.append(task)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-            }
-            // Save the items
-            //saveItems()
-        }*/
     }
     
     // TODO: Propagate this to Firebase when checked, should be marked completed
